@@ -198,5 +198,8 @@ Each team will present their product in a final presentation to the group on the
 - what you learned as individuals and as a group
 - a short story-driven demo of interesting features
 
+## Due Date
+This project is due EOD Apr 27 via PR against Ada-C9/MediaRanker-Revisited.
+
 ## What Instructors Are Looking For
 Check out the [feedback template](feedback.md) which lists the items instructors will be looking for as they evaluate your project.
