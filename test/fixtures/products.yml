@@ -1,11 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  price: 1
-  available: 1
+hb:
+  name: headband
+  price: 10
+  available: 6
 
-two:
-  name: MyString
+water:
+  name: bottled water
   price: 1
-  available: 1
+  available: 100
+
+pants:
+  name: sweatpants
+  price: 20
+  available: 10
