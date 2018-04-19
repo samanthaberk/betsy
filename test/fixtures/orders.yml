@@ -4,8 +4,13 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+basic_order:
+  date: Date.new
+  status: pending
+  name: Dan
+  email: dan@adaacademy.org
+  address: 1215 4th Ave, Seattle, WA 98161
+  cc_num: 1234567891011121
+  expiry_date: Date.new
+  cc_cvv: 111
+  zip: 98161
