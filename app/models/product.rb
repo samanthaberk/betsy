@@ -1,5 +1,5 @@
 class Product < ApplicationRecord
-  # relationship belongs to a user
+  belongs_to :merchant
   validates :name, presence: true
   validates :name, uniqueness: true
   validates :price, presence: true
