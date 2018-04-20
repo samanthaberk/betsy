@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
   def index
-    @products = Products.all
+    @products = Product.all
   end
 
   def new
@@ -17,7 +17,8 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       flash.now[:failure] = "Validations Failed"
-      render :new, :status :bad_request
+      render :new, status: :bad_request
+    end
   end
 
   def edit; end
@@ -30,6 +31,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to product_path
     else render :edit, status: :bad_request
+    end
   end
 
   def destroy
@@ -49,4 +51,5 @@ class ProductsController < ApplicationController
   def product_params
     return params.require(:product).permit(:name, :price, :available)
   end
+
 end
