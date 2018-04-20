@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+merchant_one:
+  username: merchant_one
+  email: merchant_one@gmail.com
+
+merchant_two:
+  username: merchant_two
+  email: merchant_two@gmail.com
