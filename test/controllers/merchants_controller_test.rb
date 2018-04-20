@@ -25,7 +25,7 @@ describe MerchantsController do
   end
 
   describe  "create" do
-    it "can add a valid merchant to the database" do
+    it "creates a merchant with valid data" do
       old_merchant_count = Merchant.count
 
       merchant_data = {
@@ -41,6 +41,25 @@ describe MerchantsController do
       must_redirect_to merchant_path(Merchant.last.id)
 
       Merchant.count.must_equal old_merchant_count + 1
+    end
+
+    it "renders error for missing data" do
+      old_merchant_count = Merchant.count
+
+      merchant_data = {email: 'email@gmail.com'}
+
+      merchant = Merchant.new(merchant_data)
+      Merchant.new(merchant_data).wont_be :valid?
+
+      post merchants_path, params: { merchant: merchant_data}
+
+      must_respond_with :bad_request
+      Merchant.all.count.must_equal old_merchant_count
+    end
+  end
+
+  describe "show" do
+    it "text" do
 
     end
   end

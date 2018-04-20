@@ -9,14 +9,14 @@ class MerchantsController < ApplicationController
   end
 
   def create
-    merchant = Merchant.new(merchant_params)
+    @merchant = Merchant.new(merchant_params)
 
-    if merchant.save
+    if @merchant.save
       flash[:success] = "Welcome to Sweatsy. Get ready to get sweaty!"
-      redirect_to merchant_path(merchant)
+      redirect_to merchant_path(@merchant)
     else
       flash[:error] = "Something went wrong!"
-      render :new
+      render :new, status: :bad_request
     end
 
   end
