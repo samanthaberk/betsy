@@ -23,6 +23,7 @@ class MerchantsController < ApplicationController
 
   def show
     @merchant = Merchant.find_by(id: params[:id])
+    render file: "#{Rails.root}/public/404.html", status: :not_found unless @merchant
   end
 
   private

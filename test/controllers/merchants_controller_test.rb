@@ -59,8 +59,22 @@ describe MerchantsController do
   end
 
   describe "show" do
-    it "text" do
+    it "sends a success response if the merchant exists in the database" do
+      merchant = Merchant.first
 
+      merchant.must_be :valid?
+
+      get merchant_path(merchant)
+
+      must_respond_with :success
+    end
+
+    it "sends not_found if the merchant does not exist in the database" do
+      merchant = Merchant.last.id + 1
+
+      get merchant_path(merchant)
+
+      must_respond_with :not_found
     end
   end
 
