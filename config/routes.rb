@@ -3,11 +3,13 @@ Rails.application.routes.draw do
 
   resources :products
 
+  resources :orders, only: [:show, :new, :create]
+
+  resources :categories, only: [:new, :create]
+  
   resources :merchants, except: [:edit, :update, :destroy] do
     resources :products, only: [:index]
     resources :orders, only: [:index]
   end
-
-  resources :categories, only: [:new, :create]
 
 end
