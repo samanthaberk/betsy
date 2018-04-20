@@ -1,9 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:show, :edit, :update]
-
-  def index
-    @orders = Order.all
-  end
+  before_action :find_order, only: [:show]
 
   def show; end
 
@@ -13,27 +9,29 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+    @order.status = 'pending'
     if @order.save
-      redirect_to orders_path
+      redirect_to order_path(@order.id)
     else
       render :new
     end
   end
 
-  def edit; end
+  # add product to cart, remove product from cart should go in product
 
-  def update
-    if @order.update(order_params)
-      redirect_to orders_path
-    else
-      render :edit
-    end
+  def total_price
+  end
+
+  def checkout_cart
+  end
+
+  def empty_cart
   end
 
   private
 
   def order_params
-    params.require(:order).permit(:date, :status, :name, :email, :address, :cc_num, :expiry_date, :cc_cvv, :zip)
+    params.require(:order).permit(:status, :name, :email, :address, :cc_num, :expiry_date, :cc_cvv, :zip)
   end
 
   def find_order
