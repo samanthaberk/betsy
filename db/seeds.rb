@@ -17,7 +17,7 @@ CSV.foreach(CATEGORIES_FILE, :headers => true) do |row|
 end
 
 puts "Added #{Category.count} category records"
-puts "#{category_failures.length} categories failed to save"
+puts "#{category_failures.count} categories failed to save"
 
 
 
@@ -39,7 +39,7 @@ CSV.foreach(MERCHANTS_FILE, :headers => true) do |row|
 end
 
 puts "Added #{Merchant.count} merchant records"
-puts "#{merchant_failures.length} merchants failed to save"
+puts "#{merchant_failures.count} merchants failed to save"
 
 
 
@@ -67,7 +67,7 @@ CSV.foreach(ORDERS_FILE, :headers => true) do |row|
 end
 
 puts "Added #{Order.count} order records"
-puts "#{order_failures.length} orders failed to save"
+puts "#{order_failures.count} orders failed to save"
 
 
 
@@ -93,7 +93,7 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
 end
 
 puts "Added #{Product.count} product records"
-puts "#{product_failures.length} products failed to save"
+puts "#{product_failures.count} products failed to save"
 
 
 
@@ -117,29 +117,20 @@ CSV.foreach(REVIEWS_FILE, :headers => true) do |row|
 end
 
 puts "Added #{Review.count} review records"
-puts "#{review_failures.length} reviews failed to save"
+puts "#{review_failures.count} reviews failed to save"
 
 
 
 CATEGORIESPRODUCTS_FILE = Rails.root.join('db', 'seed_data', 'categories-products.csv')
 puts "Loading raw categories_products data from #{CATEGORIESPRODUCTS_FILE}"
 
-categoryproduct_failures = []
 CSV.foreach(CATEGORIESPRODUCTS_FILE, :headers => true) do |row|
-  category_product = CategoryProduct.new
-  category_product.category_id = Category.find_by(name: row['category_name']).id
-  category_product.product_id = Product.find_by(name: row['product_name']).id
-  successful = category_product.save
-  if !successful
-    categoryproduct_failures << category_product
-    puts "Failed to save category_product: #{category_product.inspect}"
-  else
-    puts "Created category_product: #{category_product.inspect}"
-  end
+  category = Category.find_by(name: row['category_name'])
+  product = Product.find_by(name: row['product_name'])
+  category.products << product
 end
 
-puts "Added #{CategoryProduct.count} category_product records"
-puts "#{categoryproduct_failures.length} category_product records failed to save"
+puts "done with categories-products"
 
 
 
@@ -147,10 +138,10 @@ ORDERSPRODUCTS_FILE = Rails.root.join('db', 'seed_data', 'orders-products.csv')
 puts "Loading raw orders_products data from #{ORDERSPRODUCTS_FILE}"
 
 orderproduct_failures = []
-CSV.foreach(CATEGORIESPRODUCTS_FILE_FILE, :headers => true) do |row|
+CSV.foreach(ORDERSPRODUCTS_FILE, :headers => true) do |row|
   order_product = OrderProduct.new
-  order_product.order_id = row['order_id']
-  order_product.product_name = Product.find_by(name: row['product_name']).id
+  order_product.order_id = Order.find(row['order_id']).id
+  order_product.product_id = Product.find_by(name: row['product_name']).id
   order_product.quantity = row['quantity']
   successful = order_product.save
   if !successful
@@ -162,4 +153,4 @@ CSV.foreach(CATEGORIESPRODUCTS_FILE_FILE, :headers => true) do |row|
 end
 
 puts "Added #{OrderProduct.count} order_product records"
-puts "#{orderproduct_failures.length} order_product records failed to save"
+puts "#{orderproduct_failures.count} order_product records failed to save"
