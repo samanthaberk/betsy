@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  belongs_to :merchant
+  has_many :merchants, through: :products
   has_and_belongs_to_many :products
 
   validates :name, presence: true

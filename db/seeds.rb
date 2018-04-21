@@ -1,10 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'csv'
 
 CATEGORIES_FILE = Rails.root.join('db', 'seed_data', 'categories.csv')
 puts "Loading raw category data from #{CATEGORIES_FILE}"
@@ -54,7 +48,7 @@ puts "Loading raw order data from #{ORDERS_FILE}"
 
 order_failures = []
 CSV.foreach(ORDERS_FILE, :headers => true) do |row|
-  order = Category.new
+  order = Order.new
   order.status = row['status']
   order.name = row['name']
   order.email = row['email']
@@ -91,6 +85,8 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
   if !successful
     product_failures << product
     puts "Failed to save product: #{product.inspect}"
+    puts "XXXXXXXXXX"
+    puts product.errors.messages
   else
     puts "Created product: #{product.inspect}"
   end
@@ -129,7 +125,7 @@ CATEGORIESPRODUCTS_FILE = Rails.root.join('db', 'seed_data', 'categories-product
 puts "Loading raw categories_products data from #{CATEGORIESPRODUCTS_FILE}"
 
 categoryproduct_failures = []
-CSV.foreach(CATEGORIESPRODUCTS_FILE_FILE, :headers => true) do |row|
+CSV.foreach(CATEGORIESPRODUCTS_FILE, :headers => true) do |row|
   category_product = CategoryProduct.new
   category_product.category_id = Category.find_by(name: row['category_name']).id
   category_product.product_id = Product.find_by(name: row['product_name']).id
