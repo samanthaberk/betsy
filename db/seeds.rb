@@ -128,18 +128,42 @@ puts "#{review_failures.length} reviews failed to save"
 CATEGORIESPRODUCTS_FILE = Rails.root.join('db', 'seed_data', 'categories-products.csv')
 puts "Loading raw categories_products data from #{CATEGORIESPRODUCTS_FILE}"
 
-categories-products_failures = []
+categoryproduct_failures = []
 CSV.foreach(CATEGORIESPRODUCTS_FILE_FILE, :headers => true) do |row|
-  categories_products = Category.new
-  category.name = row['name']
-  successful = category.save
+  category_product = CategoryProduct.new
+  category_product.category_id = Category.find_by(name: row['category_name']).id
+  category_product.product_id = Product.find_by(name: row['product_name']).id
+  successful = category_product.save
   if !successful
-    category_failures << category
-    puts "Failed to save category: #{category.inspect}"
+    categoryproduct_failures << category_product
+    puts "Failed to save category_product: #{category_product.inspect}"
   else
-    puts "Created category: #{category.inspect}"
+    puts "Created category_product: #{category_product.inspect}"
   end
 end
 
-puts "Added #{Category.count} category records"
-puts "#{category_failures.length} categories failed to save"
+puts "Added #{CategoryProduct.count} category_product records"
+puts "#{categoryproduct_failures.length} category_product records failed to save"
+
+
+
+ORDERSPRODUCTS_FILE = Rails.root.join('db', 'seed_data', 'orders-products.csv')
+puts "Loading raw orders_products data from #{ORDERSPRODUCTS_FILE}"
+
+orderproduct_failures = []
+CSV.foreach(CATEGORIESPRODUCTS_FILE_FILE, :headers => true) do |row|
+  order_product = OrderProduct.new
+  order_product.order_id = row['order_id']
+  order_product.product_name = Product.find_by(name: row['product_name']).id
+  order_product.quantity = row['quantity']
+  successful = order_product.save
+  if !successful
+    orderproduct_failures << order_product
+    puts "Failed to save order_product: #{order_product.inspect}"
+  else
+    puts "Created order_product: #{order_product.inspect}"
+  end
+end
+
+puts "Added #{OrderProduct.count} order_product records"
+puts "#{orderproduct_failures.length} order_product records failed to save"
