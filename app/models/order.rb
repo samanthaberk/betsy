@@ -21,4 +21,5 @@ class Order < ApplicationRecord
 
   validates :zip, presence: true, format: { with: /\A[\d]+\z/,
       message: "Digits only" }
+
 end
