@@ -17,4 +17,5 @@ class Review < ApplicationRecord
 
     return ratings_sum / review_count
   end
+
 end
