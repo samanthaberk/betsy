@@ -1,5 +1,9 @@
 class Review < ApplicationRecord
 
+  belongs_to :product
+  # validates :rating, presence: true, numericality: true, length: { in: 1..5 }
+  # validates :description, presence: true
+
   def total
     self.count
   end

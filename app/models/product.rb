@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
-  has_and_belongs_to_many :orders
+  has_many :order_products
+  has_many :orders, through: :order_products
   has_and_belongs_to_many :categories
   belongs_to :merchant
 

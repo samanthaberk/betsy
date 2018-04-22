@@ -1,0 +1,65 @@
+<h2>
+  <%= "Details for order #{@order.id}" %>
+</h2>
+
+<section>
+
+<p>Summary</p>
+  <ul>
+    <li>Placed: <%= date_placed %></li>
+    <li>Status: <%= @order.status %></li>
+  </ul>
+
+</section>
+
+<section>
+
+<p>Items</p>
+  <% products_in_order.each do |p| %>
+    <ul>
+      <li><%= p.name %></li>
+      <li><%= quantity_in_order(p) %></li>
+      <% amt = product_subtotal(p) %>
+      <li><%= format_money(amt) %></li>
+    </ul>
+  <% end %>
+
+<p><%= "Total: INSERT TOTAL#{}" %></p>
+
+</section>
+
+
+<section>
+
+### DETAILS BELOW ONLY AVAILABLE IF ORDER IS NO LONGER PENDING...IF ORDER IS PENDING, NEED BUTTON GOING TO CHECKOUT
+
+<p>Contact</p>
+  <ul>
+    <li>Name: <%= @order.name %></li>
+    <li>Email: <%= @order.email %></li>
+  </ul>
+
+</section>
+
+
+<section>
+
+<p>Billing</p>
+  <ul>
+    <li>Credit Card: <%= last_four %></li>
+    <li>Expiration: <%= format_expiry %></li>
+    <li>CCV Number: <%= @order.cc_cvv %></li>
+    <li>Billing Zip: <%= @order.zip %></li>
+  </ul>
+
+</section>
+
+
+<section>
+
+  <p>Shipping</p>
+  <ul>
+    <li>Address: <%= @order.address %></li>
+  </ul>
+
+</section>
