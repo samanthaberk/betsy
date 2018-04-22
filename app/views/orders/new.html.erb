@@ -17,6 +17,8 @@
 <%= f.number_field :cc_cvv, placeholder: "XXX" %>
 
 <%= f.label :expiry_date, "Expiration: " %>
+
+### THIS IS MAKING TEST FAIL
 <%= f.date_select :expiry_date, :discard_day => true, :start_year => Date.today.year, :end_year => (Date.today.year+10), :use_month_numbers => true, :order => [:month, :year] %>
 
 <%= f.label :zip, "Billing Zip: " %>
