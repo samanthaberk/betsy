@@ -24,9 +24,9 @@
         </div>
 
         <div class='caption'>
-          <h5><strong><%= product.name %></strong> </h5>
+          <h5><strong><%=link_to product.name, product_path(product) %></strong> </h5>
           <h5 class='float-right'><%= number_to_currency(product.price) %></h5>
-          <p class='description'></p>
+          <p class='description'><%= product.description %></p>
           <p class='num_available'> <%= product.available%> Available </p>
         </div>
 
