@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
     if @product.save
       flash[:success] = "Product added successfully"
-      redirect_to products_path # QUESTION: should this be the nested merchant_products route?
+      redirect_to merchant_products_path 
     else
       flash.now[:failure] = "Validations Failed"
       render :new, status: :bad_request
