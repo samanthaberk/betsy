@@ -44,12 +44,12 @@ describe OrdersController do
       }
       old_order_count = Order.count
 
-      test = Order.new(order_data).must_be :valid?
+      Order.new(order_data).must_be :valid?
 
       post orders_path, params: { order: order_data}
 
       must_respond_with :redirect
-      must_redirect_to order_path(test.id)
+      must_redirect_to order_path(Order.last.id)
 
       Order.count.must_equal old_order_count + 1
       Order.last.name.must_equal order_data[:name]
@@ -66,15 +66,15 @@ describe OrdersController do
         cc_cvv: "123",
         # billing zip
         zip: "98004",
-        }
-        old_order_count = Order.count
+      }
+      old_order_count = Order.count
 
-        Order.new(order_data).wont_be :valid?
+      Order.new(order_data).wont_be :valid?
 
-        post orders_path, params: { order: order_data }
+      post orders_path, params: { order: order_data }
 
-        must_respond_with :bad_request
-        Order.count.must_equal old_order_count
+      must_respond_with :bad_request
+      Order.count.must_equal old_order_count
     end
 
   end
