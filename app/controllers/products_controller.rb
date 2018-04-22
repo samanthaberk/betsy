@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    @product = Product.new(merchant_id: params[:merchant_id])
   end
 
   def create
@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
     if @product.save
       flash[:success] = "Product added successfully"
-      redirect_to products_path
+      redirect_to merchant_products_path 
     else
       flash.now[:failure] = "Validations Failed"
       render :new, status: :bad_request
@@ -43,13 +43,13 @@ class ProductsController < ApplicationController
   private
 
   def find_product
-    @product = products.find_by(id: params[:id])
+    @product = Product.find_by(id: params[:id])
 
     head :not_found unless @product
   end
 
   def product_params
-    return params.require(:product).permit(:name, :price, :available)
+    return params.require(:product).permit(:name, :price, :available, :merchant_id)
   end
 
 end

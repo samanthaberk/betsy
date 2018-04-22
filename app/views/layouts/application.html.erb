@@ -1,19 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
-
+<body>
+  <nav>
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <ul class="dropdown menu" data-dropdown-menu>
+          <li class="menu-text">Sweatsy</li>
+          <li>
+            <a href="#">Browse</a>
+            <ul class="menu vertical">
+              <li><a href="#">By Merchant</a></li>
+              <li><a href="#">By Category</a></li>
+              <li><a href="/products">All Products</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Two</a></li>
+          <li><a href="#">Three</a></li>
+        </ul>
+      </div>
+      <div class="top-bar-right">
+        <ul class="login">
+          <li class='button'> Login </li>
+          <li class='button'> Sign Up</li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
     <%= yield %>
+  </main>
 
-  </body>
+
+</body>
 </html>
