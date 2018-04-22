@@ -1,0 +1,20 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+hb:
+  name: headband
+  price: 10
+  available: 6
+  merchant_id: 1
+
+water:
+  name: bottled water
+  price: 1
+  available: 100
+  merchant_id: 1
+
+
+pants:
+  name: sweatpants
+  price: 20
+  available: 10
+  merchant_id: 2
