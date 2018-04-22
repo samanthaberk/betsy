@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
-  belongs_to :merchant
-  has_and_belongs_to_many :products
+  has_many :order_products
+  has_many :products, through: :order_products
+  has_many :merchants, through: :products
 
   validates :name, presence: true
 
@@ -20,4 +21,5 @@ class Order < ApplicationRecord
 
   validates :zip, presence: true, format: { with: /\A[\d]+\z/,
       message: "Digits only" }
+
 end

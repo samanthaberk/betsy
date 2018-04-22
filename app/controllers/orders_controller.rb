@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   def show; end
 
   def new
-    @order = Order.new
+    @order = Order.new()
   end
 
   def create
@@ -13,11 +13,13 @@ class OrdersController < ApplicationController
     if @order.save
       redirect_to order_path(@order.id)
     else
-      render :new
+      render :new, status: :bad_request
     end
   end
 
   # add product to cart, remove product from cart should go in product
+  def subtotal
+  end
 
   def total_price
   end
@@ -36,6 +38,7 @@ class OrdersController < ApplicationController
 
   def find_order
     @order = Order.find_by_id(params[:id])
+    head :not_found unless @order
   end
 
 end
