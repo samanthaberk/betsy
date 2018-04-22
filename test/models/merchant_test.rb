@@ -70,12 +70,6 @@ describe Merchant do
       end
     end
 
-    it "has many reviews" do
-      @merchant.reviews.each do |review|
-        review.must_be_kind_of Review
-      end
-    end
-
     it "has many product categories" do
       @merchant.product_categories.each do |category|
         category.must_be_kind_of Category

@@ -2,9 +2,13 @@
 
 <ul>
   <% @merchants.each do |merchant| %>
-  <li><%= link_to merchant.username, merchant_path(merchant) %></li>
+  <li><%= link_to merchant.username.capitalize, merchant_path(merchant) %></li>
   <li>Average Rating: TBD</li>
-  <li>Categories: TBD</li>
+  <li>Categories:
+    <% merchant.product_categories.each do |category| %>
+    <%= link_to category.name, categories_path %> 
+    <% end %>
+  </li>
   <li>Best-Seller: TBD</li>
   <li><img src="http://lorempixel.com/200/100"/></li>
   <% end %>
