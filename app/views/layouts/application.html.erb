@@ -16,12 +16,12 @@
     <div class="top-bar">
       <div class="top-bar-left">
         <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text">Sweatsy</li>
+          <li class="menu-text"><%= link_to "Sweatsy", root_path %></li>
           <li>
             <a href="#">Browse</a>
             <ul class="menu vertical">
-              <li><a href="#">By Merchant</a></li>
-              <li><a href="#">By Category</a></li>
+              <li><a href="/merchants">By Merchant</a></li>
+              <li><a href="/categories">By Category</a></li>
               <li><a href="/products">All Products</a></li>
             </ul>
           </li>
