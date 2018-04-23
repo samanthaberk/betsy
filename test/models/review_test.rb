@@ -1,16 +1,9 @@
 require "test_helper"
 
 describe Review do
-  describe 'new' do
-    it "text" do
+  let(:review) { Review.new }
 
-    end
+  it "must be valid" do
+    value(review).must_be :valid?
   end
-
-  describe 'create' do
-    it "text" do
-
-    end
-  end
-
 end

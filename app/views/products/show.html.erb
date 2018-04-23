@@ -1,5 +1,5 @@
 <h3>Merchant:</h3>
 
-<p>
-  categories
-</p>
+<h1> <%= @product.name %> </h1>
+
+<%= link_to "Write a Review", new_product_review_path(@product.id) %>
