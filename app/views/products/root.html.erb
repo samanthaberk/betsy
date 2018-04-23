@@ -1,10 +1,38 @@
-<h3>SWEATSY</h3>
-<h4>Get ready to get sweaty</h4>
+<h2>SWEATSY</h2>
 
-<h5>Shop By Category</h5>
+<h4>Get ready to get sweaty!</h4>
 
-<ul>
-<% @categories.each do |category|%>
-  <li><%= category.name %></li>
-    <% end %>
+
+<section>
+  <h5>About Sweatsy</h5>
+  <p></p>
+</section>
+
+<section>
+  <h5>Browse Top Products</h5>
+  <% @products.each do |product|%>
+  <li><%= product.name %></li>
+  <% end %>
 </ul>
+<%= link_to "See More", products_path %>
+</section>
+
+<section>
+  <h5>Browse by Category</h5>
+  <ul>
+    <% @categories.each do |category|%>
+    <li><%= category.name %></li>
+    <% end %>
+  </ul>
+  <%= link_to "See More", categories_path %>
+</section>
+
+<section>
+  <h5>See Top Sellers</h5>
+  <ul>
+    <% @merchants.each do |merchant|%>
+    <li><%= merchant.username %></li>
+    <% end %>
+  </ul>
+  <%= link_to "See More", merchants_path %>
+</section>
