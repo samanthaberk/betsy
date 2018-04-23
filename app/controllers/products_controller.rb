@@ -14,7 +14,7 @@ class ProductsController < ApplicationController
 
     if @product.save
       flash[:success] = "Product added successfully"
-      redirect_to merchant_products_path 
+      redirect_to merchant_products_path(merchant.id)
     else
       flash.now[:failure] = "Validations Failed"
       render :new, status: :bad_request
