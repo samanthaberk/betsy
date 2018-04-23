@@ -29,7 +29,17 @@
 
 <section class='review'>
   <h3>Enjoyed this product? Write a review</h3>
-  <p class= 'button'
+
+  <%= form_for :review do |f| %>
+    <%= f.label :rating %>
+    <%= f.select :rating, (1..5) %>
+
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+
+    <%= f.submit %>
+  <% end %>
+  <!-- <p class= 'button'
     <%= link_to "Write a Review", new_product_review_path(@product.id) %>
-  </p>
+  </p> -->
 </section>
