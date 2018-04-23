@@ -10,15 +10,15 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :price, numericality: { only_integer: true, greater_than: 0}
 
-  def average_rating
-    reviews = self.reviews
-
-    review_count = reviews.count
-
-    ratings = reviews.map { |review| review.rating}
-    ratings_sum = ratings.inject { |sum, rating| sum + rating }
-
-    return (ratings_sum.to_f / review_count.to_f).round(2)
-  end
+  # def average_rating
+  #   reviews = self.reviews
+  #
+  #   review_count = reviews.count
+  #
+  #   ratings = reviews.map { |review| review.rating}
+  #   ratings_sum = ratings.inject { |sum, rating| sum + rating }
+  #
+  #   return (ratings_sum.to_f / review_count.to_f).round(2)
+  # end
 
 end
