@@ -23,6 +23,7 @@
  }
 
  #home-background-img {
+   background-image: url('home_img.jpg');
    background-repeat: no-repeat;
    background-size: cover;
    background-position: center;

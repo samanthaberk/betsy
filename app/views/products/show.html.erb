@@ -10,7 +10,6 @@
 </section>
 
 <section class= 'product info '>
-  <img src='http://placekitten.com/g/400/350' alt='placeholder photo'/>
 
   <h2><strong><%= @product.name %></strong></h2>
   <%=number_to_currency(@product.price)%>
@@ -32,4 +31,3 @@
     <%= link_to "Write a Review", new_product_review_path(@product.id) %>
   </p>
 </section>
-
