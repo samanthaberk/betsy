@@ -105,12 +105,14 @@ review_failures = []
 CSV.foreach(REVIEWS_FILE, :headers => true) do |row|
   review = Review.new
   review.rating = row['rating']
-  review.description = row['description']
+  review.description = row['details']
   review.product_id = Product.find_by(name: row['product_name']).id
   successful = review.save
   if !successful
     review_failures << review
     puts "Failed to save review: #{review.inspect}"
+    puts "XXXXXXXXXX"
+    puts review.errors.messages.inspect
   else
     puts "Created review: #{review.inspect}"
   end
