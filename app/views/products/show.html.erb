@@ -9,7 +9,6 @@
   </p>
 </section>
 
-
 <section class= 'product info '>
   <img src='http://placekitten.com/g/400/350' alt='placeholder photo'/>
 
@@ -30,6 +29,7 @@
 <section class='review'>
   <h3>Enjoyed this product? Write a review</h3>
   <p class= 'button'
-    <%= link_to 'Save Review', '#'%>
+    <%= link_to "Write a Review", new_product_review_path(@product.id) %>
   </p>
 </section>
+

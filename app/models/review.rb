@@ -1,8 +1,7 @@
 class Review < ApplicationRecord
-
+  validates :rating, presence: true
+  validates :description, presence: true
   belongs_to :product
-  # validates :rating, presence: true, numericality: true, length: { in: 1..5 }
-  # validates :description, presence: true
 
   def total
     self.count
@@ -17,4 +16,5 @@ class Review < ApplicationRecord
 
     return ratings_sum / review_count
   end
+
 end

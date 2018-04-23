@@ -6,7 +6,8 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    @review.assign_attributes(product_id: params[:product_id])
+    # @review.assign_attributes(product_id: params[:product_id])
+    @review.product_id = params[:product_id]
 
     if @review.save
       redirect_to product_path
