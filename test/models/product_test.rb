@@ -59,4 +59,53 @@ describe Product do
 
     end
   end
+
+  describe 'relationships' do
+    before do
+      @product = Product.new(
+      name: 'headband',
+      price: 8,
+      available: 300,
+      merchant_id: Merchant.first.id)
+    end
+
+    it "connects merchant and merchant_id" do
+      merchant = Merchant.first
+
+      @product.merchant = merchant
+
+      @product.must_respond_to :merchant
+      @product.merchant_id.must_equal merchant.id
+      @product.merchant.must_be_kind_of Merchant
+    end
+
+    it "connects categories and category_ids" do
+
+      category = Category.first
+
+      @product.categories << category
+
+      @product.must_respond_to :categories
+      @product.category_ids.must_include category.id
+
+    end
+
+    it "has a list of categories" do
+      @product.must_respond_to :categories
+
+      @product.categories.each do |category|
+        category.must_be_kind_of Categories
+      end
+    end
+
+    it "has a list of order_products" do
+      @product = Product.first
+
+      @product.must_respond_to :order_products
+
+      @product.order_products.each do |order_product|
+        order_product.must_be_kind_of Order_product
+      end
+    end
+  end
 end

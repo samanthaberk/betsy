@@ -5,12 +5,14 @@ hb:
   price: 10
   available: 6
   merchant_id: 1
+  categories: accessories
 
 water:
   name: bottled water
   price: 1
   available: 100
   merchant_id: 1
+  categories: accessories
 
 
 pants:
@@ -18,3 +20,4 @@ pants:
   price: 20
   available: 10
   merchant_id: 2
+  categories: pants

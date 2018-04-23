@@ -19,8 +19,7 @@
     <ul>
       <li><%= p.name %></li>
       <li><%= quantity_in_order(p) %></li>
-      <% amt = product_subtotal(p) %>
-      <li><%= format_money(amt) %></li>
+      <li><%= number_to_currency product_subtotal(p) %></li>
     </ul>
   <% end %>
 

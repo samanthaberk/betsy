@@ -34,10 +34,4 @@ module OrdersHelper
   def order_total
   end
 
-  # check w/ others before putting this in application?
-  # change all database values to cents and update method
-  def format_money(money)
-    "$#{money.round(2)}"
-  end
-
 end

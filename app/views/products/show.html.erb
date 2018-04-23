@@ -1,5 +1,35 @@
-<h3>Merchant:</h3>
+<section>
+  <h3>Merchant: <%=@product.merchant.username%></h3>
 
-<h1> <%= @product.name %> </h1>
+  <p>
+    Categories:
+    <% @product.categories.each do |category|%>
+    <%= category.name %>
+    <% end %>
+  </p>
+</section>
 
-<%= link_to "Write a Review", new_product_review_path(@product.id) %>
+<section class= 'product info '>
+  <img src='http://placekitten.com/g/400/350' alt='placeholder photo'/>
+
+  <h2><strong><%= @product.name %></strong></h2>
+  <%=number_to_currency(@product.price)%>
+  <p>
+    <%= @product.description %>
+  </p>
+  <p>
+    <%= @product.available %> Available
+  </p>
+
+  <p class= 'button'>
+    <%= link_to 'Add to cart'%>
+  </p>
+</section>
+
+<section class='review'>
+  <h3>Enjoyed this product? Write a review</h3>
+  <p class= 'button'
+    <%= link_to "Write a Review", new_product_review_path(@product.id) %>
+  </p>
+</section>
+

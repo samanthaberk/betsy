@@ -47,7 +47,7 @@ describe ProductsController do
       post products_path, params: { product: product_data}
 
       must_respond_with :redirect
-      must_redirect_to products_path
+      must_redirect_to merchant_products_path
 
       Product.count.must_equal old_product_count + 1
 
