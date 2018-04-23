@@ -15,11 +15,11 @@
 <section>
 
 <p>Items</p>
-  <% products_in_order.each do |p| %>
+  <% @order.products.each do |p| %>
     <ul>
       <li><%= p.name %></li>
-      <li><%= quantity_in_order(p) %></li>
-      <li><%= number_to_currency product_subtotal(p) %></li>
+      <li><%= @order.quantity_in_order(p) %></li>
+      <li><%= number_to_currency @order.product_subtotal(p) %></li>
     </ul>
   <% end %>
 
