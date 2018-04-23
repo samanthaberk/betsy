@@ -9,6 +9,16 @@
 
   <h6><%= link_to "Manage your orders", merchant_orders_path(@merchant.id) %></h6>
 
-  <h6><%= link_to "Create new categories", categories_path %></h6>
+  <h6>Create a new category</h6>
+</div>
 
+<div>
+  <%= form_for :category, url: categories_path do |f|%>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
+
+  <% end %>
 </div>
