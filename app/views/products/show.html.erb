@@ -10,8 +10,10 @@
 </section>
 
 <section class= 'product info '>
-
   <h2><strong><%= @product.name %></strong></h2>
+  <div>
+    <img src="http://placekitten.com/g/400/350" alt='placeholder image'/>
+  </div>
   <%=number_to_currency(@product.price)%>
   <p>
     <%= @product.description %>
@@ -20,8 +22,8 @@
     <%= @product.available %> Available
   </p>
 
-  <p class= 'button'>
-    <%= link_to 'Add to cart'%>
+  <p class='button'>
+    <%= link_to 'Add to cart', '#' %>
   </p>
 </section>
 
