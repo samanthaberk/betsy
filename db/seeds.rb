@@ -111,8 +111,6 @@ CSV.foreach(REVIEWS_FILE, :headers => true) do |row|
   if !successful
     review_failures << review
     puts "Failed to save review: #{review.inspect}"
-    puts "XXXXXXXXXX"
-    puts review.errors.messages.inspect
   else
     puts "Created review: #{review.inspect}"
   end
