@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
     @review.product_id = params[:product_id]
 
     if @review.save
-      redirect_to product_path
+      redirect_to product_path(@review.product_id)
     else
       flash[:error] = "You must submit a rating of 1-5 and a description."
       render :new
