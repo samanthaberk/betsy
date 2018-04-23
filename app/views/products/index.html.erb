@@ -14,9 +14,9 @@
       <li class="pagination-next"><a href="#" aria-label="Next page">Next</a></li>
     </ul>
   </div>
-  <div >
+  <div class='grid-x'>
     <% @products.each do |product| %>
-    <ul >
+    <ul>
       <li class='thumbnail'>
 
         <div class='image'>
@@ -24,9 +24,9 @@
         </div>
 
         <div class='caption'>
-          <h5><strong><%= product.name %></strong> </h5>
+          <h5><strong><%=link_to product.name, product_path(product) %></strong> </h5>
           <h5 class='float-right'><%= number_to_currency(product.price) %></h5>
-          <p class='description'></p>
+          <p class='description'><%= product.description %></p>
           <p class='num_available'> <%= product.available%> Available </p>
         </div>
 
@@ -35,10 +35,10 @@
           <p class='float-right'> Reviews </p>
         </div>
       </li>
-      <% end%>
     </ul>
-
+    <% end%>
   </div>
+
   <div>
     <ul class="pagination text-center">
       <li class="pagination-previous disabled">Previous</li>
