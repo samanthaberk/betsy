@@ -22,5 +22,11 @@
   <%= f.label :merchant_id %>
   <%= f.text_field :merchant_id %>
 
+<div>
+  <%= f.label :categories %>
+  <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
+</div>
+
+
   <%= f.submit %>
 <% end %>

@@ -1,8 +1,6 @@
 <section>
   <h3>Merchant: <%=@product.merchant.username%></h3>
-  <div class='button'>
-    <%= link_to 'Add a new product', new_product_path %>
-  </div>
+
   <p>
     Categories:
     <% @product.categories.each do |category|%>
@@ -24,14 +22,14 @@
     <%= @product.available %> Available
   </p>
 
-  <div class= 'button'>
+  <p class= 'button'>
     <%= link_to 'Add to cart'%>
-  </div>
+  </p>
 </section>
 
 <section class='review'>
   <h3>Enjoyed this product? Write a review</h3>
-  <div class= 'button'
+  <p class= 'button'
     <%= link_to 'Save Review', '#'%>
-  </div>
+  </p>
 </section>
