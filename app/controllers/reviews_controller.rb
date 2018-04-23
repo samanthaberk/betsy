@@ -4,6 +4,10 @@ class ReviewsController < ApplicationController
     @review = Review.new
   end
 
+  def index
+    @reviews = Review.all
+  end
+
   def create
     @review = Review.new(review_params)
     # @review.assign_attributes(product_id: params[:product_id])

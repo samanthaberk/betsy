@@ -27,6 +27,17 @@
   </p>
 </section>
 
+<section>
+  <h6>Average Review: <%= @product.average_rating %></h6>
+
+  <ul>
+  <% @product.reviews.each do |review| %>
+  <li><%= review.rating %></li>
+  <li><%= review.description %></li>
+  <% end %>
+</ul>
+</section>
+
 <section class='review'>
   <h3>Enjoyed this product? Write a review</h3>
 
