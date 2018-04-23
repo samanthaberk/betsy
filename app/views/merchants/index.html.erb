@@ -14,16 +14,16 @@
       <li class="pagination-next"><a href="#" aria-label="Next page">Next</a></li>
     </ul>
   </div>
-  <div >
+  <div class="grid-x">
     <% @merchants.each do |merchant| %>
     <ul>
       <li class='thumbnail'>
 
-        <p>
+        <h4>
           <div class="name">
             <%= link_to merchant.username.capitalize, merchant_path(merchant) %>
           </div>
-        </p>
+        </h4>
 
         <div class='image'>
           <p>Best-Seller:</p>
