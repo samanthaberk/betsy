@@ -13,7 +13,9 @@ class ReviewsController < ApplicationController
       redirect_to product_path(@review.product_id)
     else
       flash[:error] = "You must submit a rating of 1-5 and a description."
-      render :new
+      @product = Product.find_by(id: params[:product_id])
+      # id = @product.id
+      render 'products/show', status: :bad_request
     end
   end
 

@@ -6,10 +6,10 @@
 #
 one:
   rating: 1
-  description: This is review number one
-  product: hb
+  description: This review is for product 1
+  product_id: hb
 
 two:
   rating: 2
-  description: This is review number two
-  product: water
+  description: This is review is for product 2
+  product_id: water

@@ -27,9 +27,39 @@
   </p>
 </section>
 
+<section>
+  <h6>Average Review: <%= average_rating(@product) %></h6>
+
+  <h4>All Reviews</h4>
+  <table>
+    <thead>
+      <th>Rating</th>
+      <th>Description</th>
+    </thead>
+    <tbody>
+      <% @product.reviews.each do |review| %>
+      <tr>
+        <td><%= review.rating %></td>
+        <td><%= review.description %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
 <section class='review'>
   <h3>Enjoyed this product? Write a review</h3>
-  <p class= 'button'
-    <%= link_to "Write a Review", new_product_review_path(@product.id) %>
-  </p>
+
+  <%= form_for :review, url: product_reviews_path(@product.id) do |f| %>
+  <%= f.label :rating %>
+  <%= f.select :rating, (1..5) %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.submit %>
+  <% end %>
+  <!-- <p class= 'button'
+  <%= link_to "Write a Review", new_product_review_path(@product.id) %>
+</p> -->
 </section>

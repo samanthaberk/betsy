@@ -34,6 +34,22 @@ class ProductsController < ApplicationController
     end
   end
 
+# TODO: attempted to move review creation to products controller but kept getting UnKNownMethodError on merchant and products (evaluated to nil)
+  # def create_review
+  #   @review = Review.new(review_params)
+  #   @review.product_id = params[:id]
+  #
+  #   if @review.save
+  #     redirect_to product_path(@product.id)
+  #   else
+  #     flash[:error] = "You must submit a rating of 1-5 and a description."
+  #     @product = Product.find_by(id: params[:product_id])
+  #     # id = @product.id
+  #     puts "line 43 executed"
+  #     render :show, status: :bad_request
+  #   end
+  # end
+
   def edit; end
 
   def show; end
@@ -64,5 +80,8 @@ class ProductsController < ApplicationController
   def product_params
     return params.require(:product).permit(:name, :price, :available, :merchant_id)
   end
-
+  private
+  # def review_params
+  #   return params.require(:review).permit(:rating, :description)
+  # end
 end

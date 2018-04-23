@@ -4,20 +4,19 @@ hb:
   name: headband
   price: 10
   available: 6
-  merchant_id: 1
+  merchant: merchant_one
   categories: accessories
 
 water:
   name: bottled water
   price: 1
   available: 100
-  merchant_id: 1
+  merchant: merchant_two
   categories: accessories
-
 
 pants:
   name: sweatpants
   price: 20
   available: 10
-  merchant_id: 2
+  merchant: merchant_two
   categories: pants
