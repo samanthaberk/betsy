@@ -1,7 +1,12 @@
-<h6>Dashboard for <%= @merchant.username %></h6>
 
-<h6><%= link_to "Manage your products", merchant_products_path(@merchant.id) %></h6>
+<div class="text-center">
 
-<h6><%= link_to "Manage your orders", merchant_orders_path(@merchant.id) %></h6>
+  <h3>Welcome, <%= @merchant.username.capitalize %>!</h3>
 
-<h6><%= link_to "Create new categories", categories_path %></h6>
+  <h6><%= link_to "Manage your products", merchant_products_path(@merchant.id) %></h6>
+
+  <h6><%= link_to "Manage your orders", merchant_orders_path(@merchant.id) %></h6>
+
+  <h6><%= link_to "Create new categories", categories_path %></h6>
+
+</div>
