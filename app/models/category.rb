@@ -10,4 +10,5 @@ class Category < ApplicationRecord
     end
     return cat_prod
   end
+
 end

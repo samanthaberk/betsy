@@ -8,7 +8,12 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.all
+    merch_id = params[:merchant_id]
+    if merch_id.nil?
+      @products = Product.all
+    else
+      @products = Merchant.find(merch_id).products
+    end
   end
 
   def new
