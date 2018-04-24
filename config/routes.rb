@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   get '/auth/github', as: 'github_login'
 
-  post '/logout', to: 'sessions#logout', as: 'logout'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
+
   get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
 
   resources :products, except: [:edit, :update] do
