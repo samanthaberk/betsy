@@ -53,7 +53,9 @@ class ProductsController < ApplicationController
 
   def edit; end
 
-  def show; end
+  def show
+    @order_product = current_order.order_products.new
+  end
 
   def update
     @product.assign_attributes(product_params)
