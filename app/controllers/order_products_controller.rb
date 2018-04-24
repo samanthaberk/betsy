@@ -5,7 +5,10 @@ class OrderProductsController < ApplicationController
     @item = OrderProduct.new(item_params)
     @item.order = @order
     if @order.save && @item.save
+      name = Product.find_by(id: @item.product_id).name.titleize
+      quant = @item.quantity
       session[:order_id] = @order.id
+      flash[:success] = "You added #{quant} #{quant > 1 ? name.pluralize : name}!"
       redirect_to products_path
     else
       @order.errors.messages.inspect
@@ -17,7 +20,7 @@ class OrderProductsController < ApplicationController
     @item = @order.order_products.find(params[:id])
     @item.destroy
     if @order.save
-      flash[:success] = "#{Product.find_by(id: @item.product_id).name} has been deleted from your cart."
+      flash[:success] = "#{Product.find_by(id: @item.product_id).name.titleize} has been deleted from your cart."
     else
       flash[:failure] = "Something went wrong, but don't sweat it! Here's your cart."
     end
