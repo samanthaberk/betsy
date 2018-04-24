@@ -18,17 +18,6 @@ class OrdersController < ApplicationController
   end
 
   # add product to cart, remove product from cart should go in product
-  def subtotal
-  end
-
-  def total_price
-  end
-
-  def checkout_cart
-  end
-
-  def empty_cart
-  end
 
   private
 

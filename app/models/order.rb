@@ -2,6 +2,8 @@ class Order < ApplicationRecord
   has_many :order_products
   has_many :products, through: :order_products
   has_many :merchants, through: :products
+  before_save :update_status
+  before_save :order_total
 
   # validates :name, presence: true
   #
@@ -40,6 +42,21 @@ class Order < ApplicationRecord
       total += product_subtotal(product)
     end
     return total
+  end
+
+  def update_status
+    if self.status == nil?
+      self.status = "pending"
+    end
+  end
+
+  def checkout
+    if self.status == "pending"
+      self.status = "paid"
+    end
+  end
+
+  def new_cart
   end
 
 end
