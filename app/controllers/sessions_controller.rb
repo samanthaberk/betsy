@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         @merchant = Merchant.build_from_github(auth_hash)
         if @merchant.save
           session[:merchant_id] = @merchant.id
-          flash[:success] = "Successfully created new user #{@merchant.username} with ID #{@merchant.id}"
+          flash[:success] = "Successfully created new user #{@merchant.username.capitalize} with ID #{@merchant.id}"
           redirect_to merchant_path(@merchant.id)
         else
           flash[:error] = "Could not log in"
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
         end
       else
         session[:merchant_id] = @merchant.id
-        flash[:success] = "Welcome back #{@merchant.username}!"
+        flash[:success] = "Welcome back #{@merchant.username.capitalize}!"
         redirect_to merchant_path(@merchant.id)
       end
 
