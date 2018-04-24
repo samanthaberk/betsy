@@ -48,3 +48,8 @@ form {
   0px 8px 13px rgba(0,0,0,0.4),
   0px 18px 23px rgba(0,0,0,0.4);
 }
+
+i {
+  color: #1779ba;
+  cursor: pointer;
+}
