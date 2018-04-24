@@ -2,10 +2,10 @@ class SessionsController < ApplicationController
 
   def create
     auth_hash = request.env['omniauth.auth']
-  
+
 
     if auth_hash['uid']
-      @merchant = Merchant.find_by(id: auth_hash['uid'], provider: 'github')
+      @merchant = Merchant.find_by(uid: auth_hash['uid'], provider: 'github')
 
       if @merchant.nil?
         @merchant = Merchant.build_from_github(auth_hash)
@@ -38,4 +38,3 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 end
-''
