@@ -3,12 +3,15 @@ Rails.application.routes.draw do
 
   root 'products#root'
 
+  post '/products/:id/add_review', to: 'products#create_review', as: :create_review
+
   get '/auth/github', as: 'github_login'
 
   delete '/logout', to: 'sessions#destroy', as: 'logout'
+
   get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
 
-  resources :products do
+  resources :products, except: [:edit, :update] do
     resources :reviews, only: [:new, :show, :create]
   end
 
