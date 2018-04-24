@@ -32,10 +32,8 @@
         </ul>
       </div>
       <div class="top-bar-right">
-        <ul class="login">
-          <li class='button'> Login </li>
-          <li class='button'> Sign Up</li>
-        </ul>
+        <%= link_to "Already a Merchant? Login!", github_login_path, class: "button" %>
+        <%= link_to "Sell Stuff on Sweatsy!", new_merchant_path, class: 'button' %>
       </div>
     </div>
   </nav>
