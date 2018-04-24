@@ -15,6 +15,7 @@ class ReviewsController < ApplicationController
       flash[:error] = "You must submit a rating of 1-5 and a description."
       @product = Product.find_by(id: params[:product_id])
       # id = @product.id
+      # render 'products/show', status: :bad_request
       render 'products/show', status: :bad_request
     end
   end
