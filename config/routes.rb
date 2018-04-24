@@ -9,6 +9,10 @@ post '/products/:id/add_review', to: 'products#create_review', as: :create_revie
 
   resources :orders, only: [:show, :new, :create]
 
+  # may not need all routes for order_products
+  resources :order_products
+  resource :cart, only: [:show]
+
   resources :categories, only: [:new, :create, :index, :show] do
     resources :product, only: [:root]
   end

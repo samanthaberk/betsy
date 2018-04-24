@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
     merch_id = params[:merchant_id]
     if merch_id.nil?
       @products = Product.all
+      @order_product = current_order.order_products.new
     else
       @products = Merchant.find(merch_id).products
     end
@@ -52,7 +53,9 @@ class ProductsController < ApplicationController
 
   def edit; end
 
-  def show; end
+  def show
+    @order_product = current_order.order_products.new
+  end
 
   def update
     @product.assign_attributes(product_params)

@@ -34,8 +34,16 @@
 
         <div class='rating'>
           <p>Average Rating <%= average_rating(product) %> </p>
-          <p class='float-right'> Reviews </p>
         </div>
+
+        <div class='text-center'>
+            <%= form_for @order_product do |f| %>
+              <%= f.hidden_field :product_id, value: product.id %>
+              <%= f.number_field :quantity %>
+              <%= f.submit "Add to cart", class: "button" %>
+            <% end %>
+        </div>
+
       </li>
     </ul>
     <% end%>
