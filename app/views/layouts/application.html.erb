@@ -30,12 +30,21 @@
         </ul>
       </div>
       <div class="top-bar-right">
-        <%= link_to "Already a Merchant? Login!", github_login_path, class: "button" %>
+        <%= link_to "Already a Merchant? Login!", '/auth/github', class: "button" %>
         <%= link_to "Sell Stuff on Sweatsy!", new_merchant_path, class: 'button' %>
+        <%= link_to "Logout", logout_path, method: :delete, class: 'button' %>
       </div>
     </div>
   </nav>
+
+
   <main>
+    <section class="flash">
+      <% flash.each do |name, message| %>
+      <div class="<%= name %>"><%= message %></div>
+      <% end %>
+    </section>
+
     <%= yield %>
   </main>
 
