@@ -1,4 +1,5 @@
 class OrderProductsController < ApplicationController
+  before_action :find_order_product, only: [:show, :update, :edit, :destroy]
 
   def create
     @order = current_order
@@ -15,9 +16,11 @@ class OrderProductsController < ApplicationController
     end
   end
 
+  def edit; end
+
+  def update; end
+
   def destroy
-    @order = current_order
-    @item = @order.order_products.find(params[:id])
     @item.destroy
     if @order.save
       flash[:success] = "#{Product.find_by(id: @item.product_id).name.titleize} has been deleted from your cart."
@@ -30,6 +33,11 @@ class OrderProductsController < ApplicationController
   private
   def item_params
     params.require(:order_product).permit(:quantity, :product_id)
+  end
+
+  def find_order_product
+    @order = current_order
+    @item = @order.order_products.find(params[:id])
   end
 
 end
