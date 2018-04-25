@@ -17,8 +17,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  # add product to cart, remove product from cart should go in product
-
   private
 
   def order_params
