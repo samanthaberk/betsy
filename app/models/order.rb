@@ -58,12 +58,15 @@ class Order < ApplicationRecord
   end
 
   def checkout
-    if self.status == "pending"
+    if self.status = "pending"
       self.status = "paid"
+      @current_order.save
     end
   end
 
-  def new_cart
-  end
+  # def empty_cart
+  #   @current_order = Order.create(status: 'pending')
+  #   session[:order_id] = @current_order.id
+  # end
 
 end

@@ -1,9 +1,9 @@
-<h2>Checkout</h2>
+<h2><%= "Checkout #{@current_order.id} #{@current_order.status}" %></h2>
 
   <section id="checkout">
 
     <section class="form">
-      <%= form_for @current_order do |f| %>
+      <%= form_for @current_order, url: cart_path do |f| %>
 
         <%= f.label :name, "Name: " %>
         <%= f.text_field :name, placeholder: "Dwayne Johnson" %>
@@ -25,12 +25,9 @@
         <%= f.label :zip, "Billing Zip: " %>
         <%= f.number_field :zip, placeholder: "XXXXX" %>
 
-        <%= link_to "Back to Cart", cart_path, class: "button" %>
-
         <%= f.submit "Place Order", class: 'button' %>
 
-
-        <%= link_to "Place Order", place_order_path, class: "button" %>
+        <%= link_to "Back to Cart", cart_path, class: "button" %>
 
       <% end %>
     </section>

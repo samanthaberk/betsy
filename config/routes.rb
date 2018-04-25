@@ -15,14 +15,14 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :show, :create]
   end
 
-  resources :orders, only: [:show, :new, :create]
+  resources :orders, only: [:show, :new, :create, :update]
 
   get '/checkout', to: 'carts#edit', as: :checkout
-  get '/placeorder', to: 'carts#update', as: :place_order
+  get '/order_confirmation/:id', to: 'carts#confirmation', as: :confirmation
 
   # may not need all routes for order_products
   resources :order_products
-  resource :cart, only: [:show]
+  resource :cart, only: [:show, :update]
 
   resources :categories, only: [:new, :create, :index, :show] do
     resources :product, only: [:root]

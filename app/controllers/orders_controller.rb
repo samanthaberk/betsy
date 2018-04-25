@@ -19,6 +19,7 @@ class OrdersController < ApplicationController
 
   private
 
+  # does this need to be edited since we have a cart params??
   def order_params
     params.require(:order).permit(:status, :name, :email, :address, :cc_num, :expiry_date, :cc_cvv, :zip)
   end
