@@ -22,9 +22,8 @@ class OrderProductsController < ApplicationController
 
     if @item.save
       name = Product.find_by(id: @item.product_id).name.titleize
-      quant = @item.quantity
       session[:order_id] = @order.id
-      flash[:success] = "You added #{quant} #{quant > 1 ? name.pluralize : name}!"
+      flash[:success] = "You added #{@item.quantity} #{@item.quantity > 1 ? name.pluralize : name}!"
       redirect_to products_path
     else
       # FLASH MESSAGE
