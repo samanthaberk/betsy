@@ -30,6 +30,10 @@
           <h5 class='float-right'><%= number_to_currency(product.price) %></h5>
           <p class='description'><%= product.description %></p>
           <p class='num_available'> <%= product.available%> Available </p>
+          <% if session[:merchant_id] == product.merchant_id%>
+            <%= link_to 'Edit', edit_product_path(product)%>
+            <%= link_to 'Retire', product_path(product), method: :delete %>
+            <%end%>
         </div>
 
         <div class='rating'>
