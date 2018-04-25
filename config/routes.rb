@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :new, :create]
 
   get '/checkout', to: 'carts#edit', as: :checkout
-  get '/pay', to: 'carts#update', as: :pay
+  get '/placeorder', to: 'carts#update', as: :place_order
 
   # may not need all routes for order_products
   resources :order_products

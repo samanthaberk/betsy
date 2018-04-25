@@ -1,12 +1,23 @@
 <h2>Check Out</h2>
 
 <%= @current_order.inspect %>
+<%= @order_products.inspect %>
+
 
 <% if @order_products.any? %>
 
   <% @order_products.each do |i| %>
 
+    <%= form_for i do |f| %>
+
+    <div class="cart-items">
+
+
       <%= link_to i.product.name, product_path(i.product.id) %>
+
+      <% max = i.product.available %>
+      <%= f.hidden_field :product_id, value: i.product.id %>
+      <%= f.number_field :quantity, value: i.quantity, min: 1, max: max, class: "quantity" %>
 
       <span>
         <%= "Unit Price: #{number_to_currency(i.product.price)}" %>
@@ -16,9 +27,18 @@
         <%= "Total: #{number_to_currency(i.product.price * i.quantity)}" %>
       </span>
 
+       <%= f.submit "Update", class: "button" %>
+
+      <%= link_to "Delete", order_product_path(i), :data => {:confirm => "You sure you want to remove #{i.product.name} from your cart?", :method => "delete"}, class: "button" %>
+
+    </div>
 
     <% end %>
 
   <% end %>
 
 <h3>OrderTotal: <%= number_to_currency current_order.order_total %></h3>
+
+  <%= link_to "Place Order", place_order_path, class: "button" %>
+
+<% end %>
