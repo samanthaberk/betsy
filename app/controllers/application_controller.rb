@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_order
 
+  before_action :current_user
   before_action :current_order
   before_action :require_login
 
@@ -11,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if current_user.nil?
-      flash[:error] = "You must be logged in to complete that action."
+      flash[:error] = "You must be logged in to do that."
     end
   end
 

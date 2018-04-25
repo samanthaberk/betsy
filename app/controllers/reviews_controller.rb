@@ -6,7 +6,6 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    # @review.assign_attributes(product_id: params[:product_id])
     @review.product_id = params[:product_id]
 
     if @review.save
@@ -14,8 +13,6 @@ class ReviewsController < ApplicationController
     else
       flash[:error] = "You must submit a rating of 1-5 and a description."
       @product = Product.find_by(id: params[:product_id])
-      # id = @product.id
-      # render 'products/show', status: :bad_request
       render 'products/show', status: :bad_request
     end
   end
