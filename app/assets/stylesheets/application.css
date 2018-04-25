@@ -71,8 +71,3 @@ input[type=number]::-webkit-outer-spin-button {
   grid-template-columns: 1fr 5em repeat(4, 1fr);
   font-size: 1.25em;
 }
-
-
-body > main {
-  margin: 2em;
-}
