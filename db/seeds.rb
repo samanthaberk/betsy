@@ -82,6 +82,8 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
   product.name = row['name']
   product.price = row['price']
   product.available = row['available']
+  product.description = row['description']
+  product.photo = row['photo']
   product.merchant_id = Merchant.find_by(username: row['merchant_username']).id
   successful = product.save
   if !successful
