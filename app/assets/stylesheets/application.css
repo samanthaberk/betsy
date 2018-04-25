@@ -53,3 +53,20 @@ i {
   color: #1779ba;
   cursor: pointer;
 }
+
+.quantity {
+  width: 3em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+
+   opacity: 1;
+
+}
+
+.cart-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

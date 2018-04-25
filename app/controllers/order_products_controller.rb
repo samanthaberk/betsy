@@ -1,5 +1,5 @@
 class OrderProductsController < ApplicationController
-  before_action :find_order_product, only: [:show, :update, :edit, :destroy]
+  before_action :find_order_product, only: [:show, :update, :destroy]
 
   def create
     @order = current_order
@@ -12,13 +12,17 @@ class OrderProductsController < ApplicationController
       flash[:success] = "You added #{quant} #{quant > 1 ? name.pluralize : name}!"
       redirect_to products_path
     else
-      @order.errors.messages.inspect
+      # FLASH MESSAGE
+      @order.errors.messages
     end
   end
 
-  def edit; end
-
-  def update; end
+  def update
+    # FLASH MESSAGE
+    @item.assign_attributes({quantity: item_params[:quantity]})
+    @item.save
+    redirect_to cart_path
+  end
 
   def destroy
     @item.destroy
