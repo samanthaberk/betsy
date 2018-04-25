@@ -43,9 +43,9 @@
 
 
   <main>
-    <section class="flash">
+    <section class="flash" >
       <% flash.each do |name, message| %>
-      <div class="<%= name %>"><%= message %></div>
+      <div class="callout <%= name %>"><%= message %></div>
       <% end %>
     </section>
 
