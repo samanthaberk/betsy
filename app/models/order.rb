@@ -44,6 +44,7 @@ class Order < ApplicationRecord
     return total
   end
 
+  # reduce the total num of products available when user pays for an order
   def decrement(order)
     order.order_products.each do |order_product|
       order_product.product.available -= order_product.quantity
