@@ -4,6 +4,20 @@ class OrderProductsController < ApplicationController
   def create
     @order = current_order
     @item = OrderProduct.new(item_params)
+
+    product = Product.find(@item.product_id)
+    if @order.products.include?(product)
+      order_product = @order.order_products.find_by(product_id: product.id)
+      order_product.quantity += @item.quantity
+      if order_product.save
+        redirect_to products_path
+        return
+      else
+        @order.errors.messages
+        return
+      end
+    end
+
     @item.order = @order
     if @order.save && @item.save
       name = Product.find_by(id: @item.product_id).name.titleize
@@ -16,6 +30,22 @@ class OrderProductsController < ApplicationController
       @order.errors.messages
     end
   end
+
+  # def create
+  #   @order = current_order
+  #   @item = OrderProduct.new(item_params)
+  #   @item.order = @order
+  #   if @order.save && @item.save
+  #     name = Product.find_by(id: @item.product_id).name.titleize
+  #     quant = @item.quantity
+  #     session[:order_id] = @order.id
+  #     flash[:success] = "You added #{quant} #{quant > 1 ? name.pluralize : name}!"
+  #     redirect_to products_path
+  #   else
+  #     # FLASH MESSAGE
+  #     @order.errors.messages
+  #   end
+  # end
 
   def update
     # FLASH MESSAGE
