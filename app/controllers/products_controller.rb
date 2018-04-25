@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
     if @product.save
       flash[:success] = "Product added successfully"
 
-      redirect_to merchant_products_path(merchant.id)
+      redirect_to merchant_products_path(@current_user.id)
 
     else
       flash.now[:failure] = "Validations Failed"
@@ -73,5 +73,5 @@ class ProductsController < ApplicationController
   def review_params
     return params.require(:review).permit(:rating, :description)
   end
-  
+
 end
