@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
       render :new, status: :bad_request
     end
   end
-  
+
   def edit; end
 
   def show
@@ -67,8 +67,9 @@ class ProductsController < ApplicationController
   def product_params
     return params.require(:product).permit(:name, :price, :available, :merchant_id)
   end
-  private
+
   def review_params
     return params.require(:review).permit(:rating, :description)
   end
+  
 end
