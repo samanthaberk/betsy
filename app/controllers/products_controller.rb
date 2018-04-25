@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
-  skip_before_action :require_login, only: [:root, :index]
+  before_action :require_login, only: [:new, ]
 
   def root
     @products = Product.all
@@ -59,7 +59,6 @@ class ProductsController < ApplicationController
   end
 
   private
-
   def find_product
     @product = Product.find_by(id: params[:id])
 

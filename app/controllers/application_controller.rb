@@ -10,8 +10,9 @@ class ApplicationController < ActionController::Base
     @current_user ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
   end
 
+# flash message if current_user can't find a logged-in merchant
   def require_login
-    if current_user.nil?
+    unless current_user
       flash[:error] = "You must be logged in to do that."
     end
   end
