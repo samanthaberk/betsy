@@ -126,18 +126,11 @@ puts "#{review_failures.count} reviews failed to save"
 CATEGORIESPRODUCTS_FILE = Rails.root.join('db', 'seed_data', 'categories-products.csv')
 puts "Loading raw categories_products data from #{CATEGORIESPRODUCTS_FILE}"
 
-categories_products_failures = []
-CSV.foreach(CATEGORIESPRODUCTS_FILE, :headers => true) do |row|
-  category = Category.find_by(name: row['category_name']).id
-  product = Product.find_by(name: row['product_name']).id
-  successful = categories_products.save
-  if !successful
-    categories_products_failures << product
-    puts "Failed to save categories_products: #{categories_products.inspect}"
-  else
-    puts "Created review: #{categories_products.inspect}"
-  end
 
+CSV.foreach(CATEGORIESPRODUCTS_FILE, :headers => true) do |row|
+  category = Category.find_by(name: row['category_name'])
+  product = Product.find_by(name: row['product_name'])
+  category.products << product
 end
 
 puts "done with categories-products"
