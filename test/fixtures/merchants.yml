@@ -3,7 +3,11 @@
 merchant_one:
   username: merchant_one
   email: merchant_one@gmail.com
+  uid: 1
+  provider: github
 
 merchant_two:
   username: merchant_two
   email: merchant_two@gmail.com
+  uid: 2
+  provider: github
