@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :require_login, only: [:root, :index]
+
   def root
     @products = Product.all
     @categories = Category.all

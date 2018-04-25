@@ -1,9 +1,10 @@
 class SessionsController < ApplicationController
 
+  skip_before_action :require_login, only: [:create, :destroy]
+
   def create
     auth_hash = request.env['omniauth.auth']
-
-
+    
     if auth_hash['uid']
       @merchant = Merchant.find_by(uid: auth_hash['uid'], provider: 'github')
 
