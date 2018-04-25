@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 
   def current_order
     if session[:order_id]
-      result = Order.find_by(session[:order_id])
+      result = Order.find(session[:order_id])
       # if result.status == "paid"
       #   Order.new
       # else
