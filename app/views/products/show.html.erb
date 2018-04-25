@@ -1,4 +1,4 @@
-<section>
+<section class='text-center'>
   <h3>Merchant: <%=@product.merchant.username%></h3>
 
   <p>
@@ -9,10 +9,10 @@
   </p>
 </section>
 
-<section class= 'product info '>
+<section class= 'product info text-center'>
   <h2><strong><%= @product.name %></strong></h2>
   <div>
-    <img src="<%=product.photo%>" alt='placeholder image'/>
+    <img src="<%=@product.photo%>" alt='placeholder image' height='400' width='400'/>
   </div>
   <%=number_to_currency(@product.price)%>
   <p>
