@@ -44,6 +44,12 @@ class Order < ApplicationRecord
     return total
   end
 
+  def decrement(order)
+    order.order_products.each do |order_product|
+      order_product.product.available -= order_product.quantity
+    end
+  end
+
   def update_status
     if self.status == nil?
       self.status = "pending"
