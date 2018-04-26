@@ -36,7 +36,7 @@
           <% if session[:merchant_id] == product.merchant_id%>
           <p>
             <%= link_to 'Edit', edit_product_path(product)%>
-            <%= link_to 'Retire', product_path(product), method: :delete %>
+            <%= link_to 'Retire', retire_path(product), method: :patch %>
           </p>
           <%end%>
         </div>
