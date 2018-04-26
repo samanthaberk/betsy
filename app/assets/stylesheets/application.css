@@ -21,7 +21,6 @@
 /*all page body styling*/
 body,html {
   height: 100%;
-  /*background-color: #f384aa;*/
 }
 
 body {
@@ -37,12 +36,12 @@ body {
 .nav {
   width: 100%;
   position: fixed;
-  background-color: #;
 }
 .top-bar-left {
   list-style-type: none;
   font-size: 40px;
 }
+
 top-bar {
   border-bottom: $primary;
 }
