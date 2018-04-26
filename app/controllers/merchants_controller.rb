@@ -1,11 +1,13 @@
 class MerchantsController < ApplicationController
+  before_action :require_login, only: [:show, :new]
 
   def index
     @merchants = Merchant.all
   end
 
   def new
-    @merchant = Merchant.new
+    @merchant = @current_user
+    redirect_to merchant_path(@merchant)
   end
 
   def create
@@ -22,8 +24,8 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find_by(id: params[:id])
-    render file: "#{Rails.root}/public/404.html", status: :not_found unless @merchant
+    @merchant = @current_user
+    redirect_to root_path unless @merchant
   end
 
   private

@@ -1,18 +1,18 @@
-<section>
+<section class='text-center'>
   <h3>Merchant: <%=@product.merchant.username%></h3>
 
   <p>
     Categories:
     <% @product.categories.each do |category|%>
-    <%= category.name %>
+      <%= link_to category.name, category_path(category) %>
     <% end %>
   </p>
 </section>
 
-<section class= 'product info '>
-  <h2><strong><%= @product.name %></strong></h2>
+<section class= 'product info text-center'>
+  <h2><strong><%= @product.name.titleize %></strong></h2>
   <div>
-    <img src="http://placekitten.com/g/400/350" alt='placeholder image'/>
+    <img src="<%=@product.photo%>" alt='placeholder image' height='400' width='400'/>
   </div>
   <%=number_to_currency(@product.price)%>
   <p>
@@ -22,9 +22,25 @@
     <%= @product.available %> Available
   </p>
 
-  <p class='button'>
-    <%= link_to 'Add to cart', '#' %>
-  </p>
+    <div>
+      <% if session[:merchant_id] == @product.merchant_id%>
+      <p>
+        <%= link_to 'Edit', edit_product_path(@product)%>
+        <%= link_to 'Retire', retire_path(@product), method: :patch %>
+      </p>
+      <%end%>
+    </div>
+
+
+  <div class='text-center'>
+      <%= form_for :order_product, url: order_products_path do |f| %>
+        <% max = @product.available %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <%= f.number_field :quantity, value: 1, min: 1, max: max, class: "quantity" %>
+        <%= f.submit "Add to cart", class: "button" %>
+      <% end %>
+  </div>
+
 </section>
 
 <section>

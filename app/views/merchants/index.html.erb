@@ -14,29 +14,32 @@
       <li class="pagination-next"><a href="#" aria-label="Next page">Next</a></li>
     </ul>
   </div>
-  <div class="grid-x">
+  <div class='merchant-grid-x'>
     <% @merchants.each do |merchant| %>
     <ul>
       <li class='thumbnail'>
-
-        <h4>
-          <div class="name">
+        <section class="name text-center">
+          <h4 >
             <%= link_to merchant.username.capitalize, merchant_products_path(merchant.id) %>
-          </div>
-        </h4>
+          </h4>
+        </section>
 
+        <!-- <div class="categories text-center">
+          <% cat = merchant.product_categories.uniq%>
+          <% cat.each do |category| %>
+          <p>
+            <%= link_to category.name, category_path(category) %>
+          </p>
+
+          <% end %>
+        </div> -->
+        <% merchant.products.each do |product| %>
         <div class='image'>
-          <p>Best-Seller:</p>
-          <img src='http://placekitten.com/g/200/250' alt='placeholder photo' />
-        </div>
 
-        <p>
-          <div class="categories text-center">
-            <% merchant.product_categories.each do |category| %>
-            <%= link_to category.name, categories_path %>
-            <% end %>
-          </div>
-        </p>
+          <img src='<%=product.photo%>' alt='placeholder photo' />
+        </div>
+        <%end%>
+
 
       </li>
     </ul>
