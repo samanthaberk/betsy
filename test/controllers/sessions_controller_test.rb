@@ -40,10 +40,21 @@ describe SessionsController do
       login(merchant)
 
       session[:merchant_id].must_equal Merchant.first.id
+      must_redirect_to merchant_path(Merchant.first.id)
+      Merchant.count.must_equal old_merchant_count
     end
-    
+
     it "flashes error for invalid info in callback path" do
-      OmniAuth.config.mock_auth[:github] = nil
+      merchant = Merchant.new(
+        provider: 'github',
+        email: 'test@test.org',
+        username: 'testuser'
+      )
+
+      login(merchant)
+
+      flash[:error].must_equal "Could not authenticate user via Github"
+      must_redirect_to root_path
     end
   end
 
@@ -54,7 +65,7 @@ describe SessionsController do
       login(merchant)
       logout(merchant)
 
-      session[:merchant_id].must_equal nil
+      session[:merchant_id].must_be_nil
     end
   end
 end
