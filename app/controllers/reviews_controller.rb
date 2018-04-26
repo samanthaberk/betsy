@@ -1,12 +1,6 @@
 class ReviewsController < ApplicationController
   skip_before_action :require_login
 
-  def new
-    unless @current_user.nil?
-      @review = Review.new
-    end
-  end
-
   def create
     @review = Review.new(review_params)
     @review.product_id = params[:product_id]
