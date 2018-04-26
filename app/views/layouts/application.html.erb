@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Arsenal|Dosis|Handlee|Neucha|Raleway|Shadows+Into+Light" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title><%= "Sweatsy" %></title>
+
   <!-- Font Awesome CDN -->
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
 
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
@@ -14,13 +18,17 @@
 </head>
 
 <body>
-  <nav>
+  <nav class='navbar'>
     <div class="top-bar">
       <div class="top-bar-left">
+        <ul class="top-bar-left">
+          <li class="menu-text title"><strong><%= link_to "Sweatsy", root_path %></li></strong>
+        </ul>
+      </div>
+      <div class="top-bar">
         <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text"><%= link_to "Sweatsy", root_path %></li>
           <li>
-            <a href="#">Browse</a>
+            <strong><%= link_to 'Browse products', products_path, class:' button'%></strong>
             <ul class="menu vertical">
               <li><a href="/merchants">By Merchant</a></li>
               <li><a href="/categories">By Category</a></li>
@@ -35,8 +43,7 @@
           <%= link_to " #{@current_user.username}'s Dashboard ",merchant_path(@current_user), class: 'hollow button'%>
           <%= link_to "Logout", logout_path, method: :delete, class: 'button' %>
         <%else%>
-          <%= link_to "Login/Become a Merchant", '/auth/github', class: "button" %>
-           <%=link_to "Sell Stuff on Sweatsy!", new_merchant_path, class: 'button'%>
+          <%= link_to "Login/Become a Merchant", '/auth/github', class: "button" %>   
           <%end%>
 
         <a href="/cart"><i class="fa fa-shopping-cart fa-2x"></i></a>
@@ -55,6 +62,55 @@
     <%= yield %>
   </main>
 
-
+  <footer class="site-footer">
+    <div class="grid-x">
+      <div class="medium-4 columns">
+        <h4 class="site-footer-name">SWEATSY</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita dolorem accusantium architecto id quidem, itaque nesciunt quam ducimus atque.</p>
+      </div>
+      <div class="medium-4 columns">
+        <h4 class="site-footer-title">Contact Info</h4>
+        <div class="site-footer-block">
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          <p>Vilnius, Lithuania 94015</p>
+        </div>
+        <div class="site-footer-block">
+          <i class="fa fa-phone" aria-hidden="true"></i>
+          <p>1 (800) 555-5555</p>
+        </div>
+        <div class="site-footer-block">
+          <i class="fa fa-envelope-o" aria-hidden="true"></i>
+          <div class='y-grid'>
+            <p>Sweatsyco@hotmail.com</p>
+            <p>Sweatsysupport@aol.com</p>
+          </div>
+        </div>
+      </div>
+      <div class="medium-4 columns">
+        <h4 class="site-footer-title">Instagram</h4>
+        <div class="grid-x">
+          <div class="column medium-3">
+            <img src="https://placehold.it/75" alt="" />
+          </div>
+          <div class="column medium-3">
+            <img src="https://placehold.it/75" alt="" />
+          </div>
+          <div class="column medium-3">
+            <img src="https://placehold.it/75" alt="" />
+          </div>
+          <div class="column medium-3">
+            <img src="https://placehold.it/75" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="grid-x">
+        <div class="column">
+          <p>&copy; 2018 All rights reserved</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
