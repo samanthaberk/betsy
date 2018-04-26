@@ -27,15 +27,18 @@
               <li><a href="/products">All Products</a></li>
             </ul>
           </li>
-          <li><a href="#">Two</a></li>
-          <li><a href="#">Three</a></li>
+
         </ul>
       </div>
       <div class="top-bar-right">
+        <% if @current_user %>
+          <%= link_to "Logged in as #{@current_user.username}",merchant_path(@current_user)%>
+          <%= link_to "Logout", logout_path, method: :delete, class: 'button' %>
+        <%else%>
+          <%= link_to "Login/Become a Merchant", '/auth/github', class: "button" %>
+           <%=link_to "Sell Stuff on Sweatsy!", new_merchant_path, class: 'button'%>
+          <%end%>
 
-        <%= link_to "Already a Merchant? Login!", '/auth/github', class: "button" %>
-        <%= link_to "Sell Stuff on Sweatsy!", new_merchant_path, class: 'button' %>
-        <%= link_to "Logout", logout_path, method: :delete, class: 'button' %>
         <a href="/cart"><i class="fa fa-shopping-cart fa-2x"></i></a>
       </div>
     </div>

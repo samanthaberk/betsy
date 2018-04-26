@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
 
-  resources :products, except: [:edit, :update] do
+  resources :products do
     resources :reviews, only: [:new, :show, :create]
   end
 
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   end
 
   resources :merchants, except: [:edit, :update, :destroy] do
-    resources :products, only: [:index, :new]
+    resources :products, only: [:index]
     resources :orders, only: [:index]
   end
 
