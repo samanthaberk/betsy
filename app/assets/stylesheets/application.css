@@ -43,7 +43,7 @@ body {
 }
 
 top-bar {
-  border-bottom: $primary;
+  border-bottom: primary;
 }
 
 /*form styling*/
