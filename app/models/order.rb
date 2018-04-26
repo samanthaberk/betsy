@@ -58,7 +58,7 @@ class Order < ApplicationRecord
   end
 
   def checkout
-    if self.status = "pending"
+    if self.status == "pending"
       self.status = "paid"
       @current_order.save
     end
