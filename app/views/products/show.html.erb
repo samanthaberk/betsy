@@ -10,9 +10,9 @@
 </section>
 
 <section class= 'product info text-center'>
-  <h2><strong><%= @product.name %></strong></h2>
+  <h2><strong><%= @product.name.titleize %></strong></h2>
   <div>
-    <img src="#{<%=@product.photo%>}" alt='placeholder image' height='400' width='400'/>
+    <img src="<%=@product.photo%>" alt='placeholder image' height='400' width='400'/>
   </div>
   <%=number_to_currency(@product.price)%>
   <p>

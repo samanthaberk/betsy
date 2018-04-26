@@ -154,7 +154,7 @@ ul.merchants li {
 }
 
 i {
-  color: #1779ba;
+  color: #C36891;
   cursor: pointer;
 }
 /*product grid styling*/
@@ -281,4 +281,3 @@ input[type=number]::-webkit-outer-spin-button {
 .site-footer-bottom .site-footer-bottom-links a {
   color: #8aa0ae;
 }
-

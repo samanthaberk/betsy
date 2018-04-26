@@ -22,7 +22,7 @@
       <li class='thumbnail'>
 
         <div class='image'>
-          <img src='<%=product.photo%>' alt='placeholder photo' />
+          <img src='<%=product.photo%>' alt='placeholder photo' height='200' width='250'/>
         </div>
 
         <div class='caption'>
@@ -31,7 +31,7 @@
           <p class='description'><%= product.description %></p>
           <p class='num_available'> <%= product.available%> Available </p>
         </div>
-        
+
         <div>
           <p class='float-right'><strong><%= number_to_currency(product.price) %></strong></p>
           <% if session[:merchant_id] == product.merchant_id%>
