@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
-
-  skip_before_action :require_login, only: [:root, :index]
+  before_action :correct_merchant, only: [:edit, :update, :destroy]
+  skip_before_action :require_login, only: [:index, :root, :show]
 
   def root
     @products = Product.all
@@ -20,11 +20,12 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new(merchant_id: params[:merchant_id])
+    @product = Product.new(merchant: @current_user)
   end
 
   def create
     @product = Product.new(product_params)
+    @product.merchant = @current_user
 
     if @product.save
       flash[:success] = "Product added successfully"
@@ -37,10 +38,12 @@ class ProductsController < ApplicationController
     end
   end
 
-  def edit; end
 
   def show
-    @order_product = current_order.order_products.new
+  end
+
+  def edit
+    # Check that the current_user matches the user associated with the product
   end
 
   def update
@@ -59,15 +62,21 @@ class ProductsController < ApplicationController
   end
 
   private
-
   def find_product
     @product = Product.find_by(id: params[:id])
-
     head :not_found unless @product
   end
 
+  def correct_merchant
+    # find_product
+    unless session[:merchant_id] == @product.merchant.id
+      flash[:error] = "Merchant and product do not match"
+      redirect_to root_path
+    end
+  end
+
   def product_params
-    return params.require(:product).permit(:name, :price, :available, :merchant_id)
+    return params.require(:product).permit(:name, :price, :available)
   end
 
   def review_params

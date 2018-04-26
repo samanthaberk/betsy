@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+skip_before_action :require_login, only: [:index, :show]
 
   def index
     @products_by_category = Category.products_by_category
