@@ -32,7 +32,7 @@
       </div>
       <div class="top-bar-right">
         <% if @current_user %>
-          <%= link_to "Logged in as #{@current_user.username}",merchant_path(@current_user)%>
+          <%= link_to " #{@current_user.username}'s Dashboard ",merchant_path(@current_user), class: 'hollow button'%>
           <%= link_to "Logout", logout_path, method: :delete, class: 'button' %>
         <%else%>
           <%= link_to "Login/Become a Merchant", '/auth/github', class: "button" %>
