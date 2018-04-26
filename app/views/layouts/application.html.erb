@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css?family=Arsenal|Dosis|Handlee|Neucha|Raleway|Shadows+Into+Light" rel="stylesheet">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title><%= "Sweatsy" %></title>
+
   <!-- Font Awesome CDN -->
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <%= favicon_link_tag asset_path('favicon.png'), :rel => 'icon', :type =>  'image/png' %>
+
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 
 <body>
-  <nav>
+  <nav class='navbar'>
     <div class="top-bar">
       <div class="top-bar-left">
+        <ul class="top-bar-left">
+          <li class="menu-text title"><strong><%= link_to "Sweatsy", root_path %></li></strong>
+        </ul>
+      </div>
+      <div class="top-bar">
         <ul class="dropdown menu" data-dropdown-menu>
-          <li class="menu-text"><%= link_to "Sweatsy", root_path %></li>
           <li>
-            <a href="#">Browse</a>
+            <strong><%= link_to 'Browse products', products_path, class:' button'%></strong>
             <ul class="menu vertical">
               <li><a href="/merchants">By Merchant</a></li>
               <li><a href="/categories">By Category</a></li>
