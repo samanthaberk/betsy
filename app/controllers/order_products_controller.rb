@@ -6,8 +6,7 @@ class OrderProductsController < ApplicationController
     @order = current_order
     product = Product.find_by(id: params[:order_product][:product_id])
 
-    # Maybe: make an instance method on Order to do this work and return
-    # the item
+    # Maybe: make an instance method on Order to do this work and return the item
     @item = @order.order_products.find_by(product: product)
     if @item
       @item.quantity += (params[:order_product][:quantity]).to_i
@@ -22,6 +21,8 @@ class OrderProductsController < ApplicationController
     end
 
     if @item.save
+      @current_order.total = @current_order.order_total
+      @current_order.save
       name = Product.find_by(id: @item.product_id).name.titleize
       session[:order_id] = @order.id
       flash[:success] = "You added #{@item.quantity} #{@item.quantity > 1 ? name.pluralize : name}!"

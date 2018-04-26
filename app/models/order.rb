@@ -5,41 +5,33 @@ class Order < ApplicationRecord
   before_save :update_status
   before_save :order_total
 
-  # validates :name, presence: true
+  # validates :name, presence: true,if: :ready_to_save?
   #
-  # validates :email, presence: true, format: {with: /@/, message: "Must include @"}
+  # validates :email, presence: true, if: :ready_to_save?, format: {with: /@/, message: "Must include @"}
   #
-  # validates :address, presence: true, format: { with: /\A[\d]+/,
+  # validates :address, presence: true, if: :ready_to_save?, format: { with: /\A[\d]+/,
   #   message: "Must start with digits" }
-  #
-  # validates :cc_num, presence: true, format: { with: /\A[\d]{16}\z/,
+
+  # validates :cc_num, presence: true, if: :ready_to_save?, format: { with: /\A[\d]{16}\z/,
   #   message: "Digits only" }
   #
-  # validates :expiry_date, presence: true, format: { with: /\A[\d]{4}\z/,
+  # # validates :expiry_date, presence: true, if: :ready_to_save?, format: { with: /\A[\d]{4}\z/,
+  # #   message: "Digits only" }
+  #
+  # validates :cc_cvv, presence: true, if: :ready_to_save?, format: { with: /\A[\d]{3}\z/,
   #   message: "Digits only" }
   #
-  # validates :cc_cvv, presence: true, format: { with: /\A[\d]{3}\z/,
-  #   message: "Digits only" }
-  #
-  # validates :zip, presence: true, format: { with: /\A[\d]+\z/,
+  # validates :zip, presence: true, if: :ready_to_save?, format: { with: /\A[\d]+\z/,
   #     message: "Digits only" }
 
-  def quantity_in_order(product)
-    self.order_products.find_by(product_id: product.id).quantity
-  end
-
-  # can i use a price function in product?
-  def product_subtotal(product)
-    quant = quantity_in_order(product)
-    price = product.price
-    return quant * price
+  def ready_to_save?
+    self.status == "pending"
   end
 
   def order_total
     total = 0
     self.order_products.each do |order_product|
-      product = order_product.product
-      total += product_subtotal(product)
+      total += order_product.subtotal
     end
     return total
   end
@@ -57,16 +49,11 @@ class Order < ApplicationRecord
     end
   end
 
-  def checkout
-    if self.status == "pending"
-      self.status = "paid"
-      @current_order.save
-    end
+  def get_expiry(params)
+    date = Date.new(params[:order]["expiry_date(1i)"].to_i,
+                       params[:order]["expiry_date(2i)"].to_i,
+                       params[:order]["expiry_date(3i)"].to_i)
+    self.expiry_date = "#{date.month}/#{date.year}"
   end
-
-  # def empty_cart
-  #   @current_order = Order.create(status: 'pending')
-  #   session[:order_id] = @current_order.id
-  # end
 
 end

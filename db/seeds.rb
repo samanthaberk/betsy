@@ -59,6 +59,7 @@ CSV.foreach(ORDERS_FILE, :headers => true) do |row|
   order.expiry_date = row['expiry_date']
   order.cc_cvv = row['cc_cvv']
   order.zip = row['zip']
+  order.total = row['total']
   successful = order.save
   if !successful
     order_failures << order
