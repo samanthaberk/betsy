@@ -7,6 +7,7 @@ module ProductsHelper
     ratings = reviews.map { |review| review.rating}
     ratings_sum = ratings.inject { |sum, rating| sum + rating }
 
-    return (ratings_sum.to_f / review_count.to_f).round(2)
+
+    return (ratings_sum.to_f / review_count.to_f).round(2) if !ratings_sum.nil?
   end
 end

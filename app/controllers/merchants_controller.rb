@@ -1,13 +1,13 @@
 class MerchantsController < ApplicationController
-  skip_before_action :require_login, only: [:index, :new, :create]
-  before_action :require_login, only: [:show]
+  before_action :require_login, only: [:show, :new]
 
   def index
     @merchants = Merchant.all
   end
 
   def new
-    @merchant = Merchant.new
+    @merchant = @current_user
+    redirect_to merchant_path(@merchant)
   end
 
   def create

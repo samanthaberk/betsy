@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :retire, :destroy]
   before_action :correct_merchant, only: [:edit, :update, :destroy]
   skip_before_action :require_login, only: [:index, :root, :show]
 
@@ -43,6 +43,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
+
     # Check that the current_user matches the user associated with the product
   end
 
@@ -61,6 +62,18 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
 
+  def retire
+    if @product.merchant = @current_user
+      @product.available = 0
+      if @product.save
+        flash[:success] = "Successfully retired."
+      else
+        flash[:failure] = "Could not Retire, Try Again"
+      end
+    end
+    redirect_to products_path
+  end
+
   private
   def find_product
     @product = Product.find_by(id: params[:id])
@@ -76,7 +89,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    return params.require(:product).permit(:name, :price, :available)
+    return params.require(:product).permit(:name, :price, :available, :photo, :description)
   end
 
   def review_params
