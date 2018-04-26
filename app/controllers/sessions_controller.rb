@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
 
-  skip_before_action :require_login, only: [:create, :destroy]
+  skip_before_action :require_login
 
   def create
     auth_hash = request.env['omniauth.auth']
-    
+
     if auth_hash['uid']
       @merchant = Merchant.find_by(uid: auth_hash['uid'], provider: 'github')
 
@@ -29,7 +29,6 @@ class SessionsController < ApplicationController
       flash[:error] = "Could not authenticate user via Github"
       redirect_to root_path
     end
-
   end
 
 

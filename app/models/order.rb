@@ -44,6 +44,13 @@ class Order < ApplicationRecord
     return total
   end
 
+  # reduce the total num of products available when user pays for an order
+  def decrement(order)
+    order.order_products.each do |order_product|
+      order_product.product.available -= order_product.quantity
+    end
+  end
+
   def update_status
     if self.status == nil?
       self.status = "pending"
@@ -53,10 +60,13 @@ class Order < ApplicationRecord
   def checkout
     if self.status == "pending"
       self.status = "paid"
+      @current_order.save
     end
   end
 
-  def new_cart
-  end
+  # def empty_cart
+  #   @current_order = Order.create(status: 'pending')
+  #   session[:order_id] = @current_order.id
+  # end
 
 end

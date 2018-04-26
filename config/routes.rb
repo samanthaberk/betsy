@@ -11,22 +11,25 @@ Rails.application.routes.draw do
 
   get "/auth/:provider/callback", to: "sessions#create", as: 'auth_callback'
 
-  resources :products, except: [:edit, :update] do
+  resources :products do
     resources :reviews, only: [:new, :show, :create]
   end
 
-  resources :orders, only: [:show, :new, :create]
+  resources :orders, only: [:show, :new, :create, :update]
+
+  get '/checkout', to: 'carts#edit', as: :checkout
+  get '/order_confirmation/:id', to: 'carts#confirmation', as: :confirmation
 
   # may not need all routes for order_products
   resources :order_products
-  resource :cart, only: [:show]
+  resource :cart, only: [:show, :update]
 
   resources :categories, only: [:new, :create, :index, :show] do
     resources :product, only: [:root]
   end
 
   resources :merchants, except: [:edit, :update, :destroy] do
-    resources :products, only: [:index, :new]
+    resources :products, only: [:index]
     resources :orders, only: [:index]
   end
 

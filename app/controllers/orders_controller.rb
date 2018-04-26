@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  skip_before_action :require_login
   before_action :find_order, only: [:show]
 
   def show; end
@@ -17,10 +18,9 @@ class OrdersController < ApplicationController
     end
   end
 
-  # add product to cart, remove product from cart should go in product
-
   private
 
+  # does this need to be edited since we have a cart params??
   def order_params
     params.require(:order).permit(:status, :name, :email, :address, :cc_num, :expiry_date, :cc_cvv, :zip)
   end
