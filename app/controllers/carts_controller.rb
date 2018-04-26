@@ -1,7 +1,6 @@
 class CartsController < ApplicationController
  before_action :find_order_products
- skip_before_action :require_login, only: [:show]
-
+ skip_before_action :require_login
 
   def show; end
 
