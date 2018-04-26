@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   resources :orders, only: [:show, :new, :create, :update]
 
   get '/checkout', to: 'carts#edit', as: :checkout
-  get '/order_confirmation/:id', to: 'carts#confirmation', as: :confirmation
+  get '/order_confirmation', to: 'carts#confirmation', as: :confirmation
 
   # may not need all routes for order_products
   resources :order_products

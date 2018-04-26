@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_order
+  helper_method :current_order, :previous_order
 
   before_action :current_user
   before_action :current_order
