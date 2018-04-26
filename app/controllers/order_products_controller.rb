@@ -4,19 +4,53 @@ class OrderProductsController < ApplicationController
 
   def create
     @order = current_order
-    @item = OrderProduct.new(item_params)
-    @item.order = @order
-    if @order.save && @item.save
+    product = Product.find_by(id: params[:order_product][:product_id])
+
+    # Maybe: make an instance method on Order to do this work and return
+    # the item
+    @item = @order.order_products.find_by(product: product)
+    if @item
+      @item.quantity += (params[:order_product][:quantity]).to_i
+    else
+      @item = @order.order_products.new(item_params)
+    end
+
+    if @item.quantity > product.available
+      flash[:error] = "Only #{product.available} currently available."
+      redirect_to products_path
+      return
+    end
+
+    if @item.save
       name = Product.find_by(id: @item.product_id).name.titleize
-      quant = @item.quantity
       session[:order_id] = @order.id
-      flash[:success] = "You added #{quant} #{quant > 1 ? name.pluralize : name}!"
+      flash[:success] = "You added #{@item.quantity} #{@item.quantity > 1 ? name.pluralize : name}!"
       redirect_to products_path
     else
       # FLASH MESSAGE
       @order.errors.messages
     end
   end
+
+  def order_num_valid?(quantity, availability)
+
+  end
+
+  # def create
+  #   @order = current_order
+  #   @item = OrderProduct.new(item_params)
+  #   @item.order = @order
+  #   if @order.save && @item.save
+  #     name = Product.find_by(id: @item.product_id).name.titleize
+  #     quant = @item.quantity
+  #     session[:order_id] = @order.id
+  #     flash[:success] = "You added #{quant} #{quant > 1 ? name.pluralize : name}!"
+  #     redirect_to products_path
+  #   else
+  #     # FLASH MESSAGE
+  #     @order.errors.messages
+  #   end
+  # end
 
   def update
     # FLASH MESSAGE
@@ -34,6 +68,7 @@ class OrderProductsController < ApplicationController
     end
     redirect_to cart_path
   end
+
 
   private
   def item_params
