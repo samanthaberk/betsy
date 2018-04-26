@@ -255,6 +255,11 @@ input[type=number]::-webkit-outer-spin-button {
   color: #020304;
 }
 
+.instagram {
+  height: 75px;
+  width: 75px;
+}
+
 .y-grid p {
   margin: 0;
 }
