@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180424175628) do
+ActiveRecord::Schema.define(version: 20180426150803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20180424175628) do
     t.string "expiry_date"
     t.string "cc_cvv"
     t.string "zip"
+    t.integer "total"
   end
 
   create_table "products", force: :cascade do |t|

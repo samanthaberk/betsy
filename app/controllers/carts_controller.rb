@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
- before_action :find_order_products
- skip_before_action :require_login, only: [:show]
-
+  before_action :find_order_products
+  skip_before_action :require_login
+  before_action :previous_order, only: [:confirmation]
 
   def show; end
 
@@ -11,12 +11,16 @@ class CartsController < ApplicationController
 
   def update
     @current_order.assign_attributes(cart_params)
-
+    @current_order.get_expiry(params)
+    @current_order.ready_to_save?
     if @current_order.save
-      @current_order.checkout
-      previous_order = @current_order
-
-      redirect_to confirmation_path(previous_order.id)
+      @current_order.status = "paid"
+      if @current_order.save
+        # empty cart by setting session[:order_id] to nil
+        session[:order_id] = nil
+        session[:prev_order_id] = @current_order.id # here
+        redirect_to confirmation_path
+      end
     else
       render :edit, status: :bad_request
     end
@@ -29,7 +33,11 @@ class CartsController < ApplicationController
   end
 
   def cart_params
-    params.require(:order).permit(:name, :email, :address, :cc_num, :expiry_date, :cc_cvv, :zip)
+    params.require(:order).permit(:name, :email, :cc_num, :cc_cvv, :zip, expiry_date: {})
+  end
+
+  def previous_order
+    @previous_order ||= Order.find_by(id: session[:prev_order_id])
   end
 
 end
