@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :require_login, only: [:root, :index]
+
   def root
     @products = Product.all
     @categories = Category.all
@@ -27,14 +29,14 @@ class ProductsController < ApplicationController
     if @product.save
       flash[:success] = "Product added successfully"
 
-      redirect_to merchant_products_path(merchant.id)
+      redirect_to merchant_products_path(@current_user.id)
 
     else
       flash.now[:failure] = "Validations Failed"
       render :new, status: :bad_request
     end
   end
-  
+
   def edit; end
 
   def show
@@ -67,8 +69,9 @@ class ProductsController < ApplicationController
   def product_params
     return params.require(:product).permit(:name, :price, :available, :merchant_id)
   end
-  private
+
   def review_params
     return params.require(:review).permit(:rating, :description)
   end
+
 end

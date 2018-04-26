@@ -73,6 +73,7 @@ i {
 
 .quantity {
   width: 3em;
+  display: inline;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -83,7 +84,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .cart-items {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display:grid;
+  grid-template-columns: 1fr 5em repeat(4, 1fr);
+  font-size: 1.25em;
 }
