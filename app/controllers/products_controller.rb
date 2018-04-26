@@ -43,6 +43,7 @@ class ProductsController < ApplicationController
   end
 
   def edit
+
     # Check that the current_user matches the user associated with the product
   end
 
@@ -76,7 +77,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    return params.require(:product).permit(:name, :price, :available)
+    return params.require(:product).permit(:name, :price, :available, :photo, :description)
   end
 
   def review_params
