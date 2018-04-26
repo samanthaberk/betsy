@@ -1,42 +1,98 @@
-<div id="home-background-img">
-  <section class="home-container">
-    <h2 class="homepage-title">SWEATSY</h2>
-    <div class="content-underline"></div>
-    <h4 class="homepage-title"><em>Get ready to get sweaty!</em></h4>
+<div class="homepage">
+  <div id="home-background-img">
+    <section class="home-container">
+      <h2 class="homepage-title">SWEATSY</h2>
+      <div class="content-underline"></div>
+      <h4 class="homepage-title"><em>Get ready to get sweaty!</em></h4>
+    </section>
+  </div>
+  <section>
+    <h4 class='home-header'>Our Story</h4>
+    <hr />
+    <p>Storify Dan Fleckner Robin Sloan <strong>hashtag</strong> future of <strong>context</strong> The Work of Art in the Age of <strong>Mechanical Reproduction</strong> fourth estate semipermeable newspaper strike fair use hyperlocal <strong>West Seattle</strong> Blog process vs. product, startups discuss production of innocence commons-based peer production hashtag paidContent Ushahidi I saw it on Mediagazer trolls dingbat David Foster Wallace crowdsourcing, net neutrality Neil Postman analytics Walter Cronkite died for your sins Gutenberg afternoon paper <strong>TechCrunch NPR</strong> fair use Innovator's Dilemma +1.</p>
+  </section>
+
+  <section>
+    <div class="text-center">
+      <h4 class='home-header'>Browse Top <big>P</big>roducts</h4>
+      <hr />
+      <ul>
+        <% @products.each do |product|%>
+        <li class='thumbnail'>
+          <div class='caption'>
+            <h5><strong><%=link_to product.name, product_path(product) %></strong> </h5>
+          </div>
+          <div class='home-image-expand'>
+            <img src=<%=product.photo%> alt='placeholder photo' />
+          </div>
+        </li>
+        <% end %>
+      </ul>
+      <%= link_to "See More", products_path, class:'button' %>
+    </div>
+  </section>
+
+
+  <section>
+    <div class="text-center">
+      <h4 class='home-header'>Browse by <big>C</big>ategory</h4>
+      <hr />
+      <ul >
+        <li class='thumbnail'>
+          <div class='caption'>
+            <h5><strong><%= link_to 'Shirts', categories_path %></strong> </h5>
+          </div>
+          <div class='home-image'>
+            <img src='http://via.placeholder.com/200x250' alt='placeholder photo' />
+          </div>
+        </li>
+
+        <li class='thumbnail'>
+          <div class='caption'>
+            <h5><strong><%= link_to 'Shoes', categories_path %></strong> </h5>
+          </div>
+          <div class='home-image'>
+            <img src='http://via.placeholder.com/200x250' alt='placeholder photo' />
+          </div>
+        </li>
+
+        <li class='thumbnail'>
+          <div class='caption'>
+            <h5><strong><%= link_to 'Accessories', categories_path %></strong> </h5>
+          </div>
+          <div class='home-image'>
+            <img src='http://via.placeholder.com/200x250' alt='placeholder photo' />
+          </div>
+        </li>
+
+        <li class='thumbnail'>
+          <div class='caption'>
+            <h5><strong><%= link_to 'Legwarmers', categories_path %></strong> </h5>
+          </div>
+          <div class='home-image'>
+            <img src='http://via.placeholder.com/200x250' alt='placeholder photo' />
+          </div>
+        </li>
+
+      </ul>
+      <%= link_to "See More", categories_path, class:'button'  %>
+    </div>
+  </section>
+
+  <section>
+    <div class="text-center">
+
+      <h4 class='home-header'>See Top <big>S</big>ellers</h4>
+      <hr />
+      <ul class="grid-x merchants">
+      	<li class="size1"><%= link_to Merchant.find(1).username, merchants_path %></li>
+        <li class="size2"><%= link_to Merchant.find(2).username, merchants_path %></li>
+        <li class="size3"><%= link_to Merchant.find(3).username, merchants_path %></li>
+        <li class="size4"><%= link_to Merchant.find(4).username, merchants_path %></li>
+      </ul>
+      <%= link_to "See More", merchants_path, class:'button'  %>
+      <br>
+      <%= link_to "Sign Up to Sell", new_merchant_path, class:'button' %>
+    </div>
   </section>
 </div>
-<section>
-  <h5>Our Story</h5>
-  <p>Storify Dan Fleckner Robin Sloan <strong>hashtag</strong> future of <strong>context</strong> The Work of Art in the Age of <strong>Mechanical Reproduction</strong> fourth estate semipermeable newspaper strike fair use hyperlocal <strong>West Seattle</strong> Blog process vs. product, startups discuss production of innocence commons-based peer production hashtag paidContent Ushahidi I saw it on Mediagazer trolls dingbat David Foster Wallace crowdsourcing, net neutrality Neil Postman analytics Walter Cronkite died for your sins Gutenberg afternoon paper <strong>TechCrunch NPR</strong> fair use Innovator's Dilemma +1.</p>
-</section>
-
-<section>
-  <h5>Browse Top <big>Products</big></h5>
-  <% @products.each do |product|%>
-  <li><%= product.name %></li>
-  <% end %>
-</ul>
-<%= link_to "See More", products_path %>
-</section>
-
-<section>
-  <h5>Browse by <big>Category</big></h5>
-  <ul>
-    <% @categories.each do |category|%>
-    <li><%= category.name %></li>
-    <% end %>
-  </ul>
-  <%= link_to "See More", categories_path %>
-</section>
-
-<section>
-  <h5>See Top <big>Sellers</big></h5>
-  <ul>
-    <% @merchants.each do |merchant|%>
-    <li><%= merchant.username %></li>
-    <% end %>
-  </ul>
-  <%= link_to "See More", merchants_path %>
-  <br>
-  <%= link_to "Sign Up to Sell", new_merchant_path %>
-</section>
