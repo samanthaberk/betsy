@@ -10,9 +10,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
   end
 
+# flashes message if current_user can't find a logged-in merchant
   def require_login
-    if current_user.nil?
+    unless current_user
       flash[:error] = "You must be logged in to do that."
+      redirect_back fallback_location: root_path
     end
   end
 

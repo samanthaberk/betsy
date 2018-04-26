@@ -1,4 +1,5 @@
 class OrderProductsController < ApplicationController
+  skip_before_action :require_login
   before_action :find_order_product, only: [:show, :update, :destroy]
 
   def create
