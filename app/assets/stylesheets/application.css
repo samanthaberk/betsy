@@ -99,31 +99,31 @@ ul.merchants li {
 }
 
 .size1, .size2, .size3, .size4 {
-	font-size: 2em;
+  font-size: 2em;
 }
 .size1 :hover {
-		color: purple;
-    font-weight: bold;
-    font-size: 2em;
-	}
+  color: purple;
+  font-weight: bold;
+  font-size: 2em;
+}
 
 .size2 :hover {
-		color: #cc3500;
-    font-weight: bold;
-    font-size: 2em;
-	}
+  color: #cc3500;
+  font-weight: bold;
+  font-size: 2em;
+}
 
 .size3 :hover {
-	  color: #d8c100;
-    font-weight: bold;
-    font-size: 2em;
+  color: #d8c100;
+  font-weight: bold;
+  font-size: 2em;
 }
 
 .size4 :hover {
-		color: #2daf00;
-    font-weight: bold;
-    font-size: 2em;
-	}
+  color: #2daf00;
+  font-weight: bold;
+  font-size: 2em;
+}
 
 i {
   color: #1779ba;
@@ -148,15 +148,69 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 1.25em;
 }
 
-#footer {
-  background: #cccccc;
-  height: 5em;
-  position: fixed bottom;
-  margin: 0;
-  padding: 0;
+/** FOOTER **/
+
+.site-footer {
+  background: #2c3840;
+  color: #8aa0ae;
+  padding: 2rem;
 }
 
-#footer p {
-  padding: 2em .5em 0 .5em;
-  float: left;
+.site-footer .column-block {
+  margin-bottom: 30px;
+}
+
+.site-footer > .row {
+  margin-bottom: 1rem;
+}
+
+.site-footer-name {
+  color: #fefefe;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.site-footer-title {
+  color: #fefefe;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.site-footer-block {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.site-footer-block .fa {
+  font-size: 2rem;
+  color: #020304;
+}
+
+.y-grid p {
+  margin: 0;
+}
+
+.site-footer-block p {
+  margin-left: 1rem;
+  line-height: 1.125rem;
+}
+
+.site-footer-bottom {
+  background: #020304;
+  padding: 1rem 0;
+}
+
+.site-footer-bottom p,
+.site-footer-bottom .menu {
+  margin-bottom: 0;
+}
+
+.site-footer-bottom .site-footer-bottom-links {
+  float: right;
+}
+
+.site-footer-bottom .site-footer-bottom-links a {
+  color: #8aa0ae;
 }
