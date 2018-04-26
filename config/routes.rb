@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root 'products#root'
 
+  patch '/products/:id/retire', to: 'products#retire', as: 'retire'
+
   post '/products/:id/add_review', to: 'products#create_review', as: :create_review
 
   get '/auth/github', as: 'github_login'

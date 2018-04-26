@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :find_product, only: [:show, :edit, :update, :destroy]
+  before_action :find_product, only: [:show, :edit, :update, :retire, :destroy]
   before_action :correct_merchant, only: [:edit, :update, :destroy]
   skip_before_action :require_login, only: [:index, :root, :show]
 
@@ -59,6 +59,18 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
 
+    redirect_to products_path
+  end
+
+  def retire
+    if @product.merchant = @current_user
+      @product.available = 0
+      if @product.save
+        flash[:success] = "Successfully retired."
+      else
+        flash[:failure] = "Could not Retire, Try Again"
+      end
+    end
     redirect_to products_path
   end
 
