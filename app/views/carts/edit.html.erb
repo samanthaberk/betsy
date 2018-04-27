@@ -1,5 +1,7 @@
 <h2><%= "Checkout for order #{@current_order.id}" %></h2>
 
+<%= render partial: "layouts/error_messages", locals: { model: @current_order } %>
+
 <section>
   <% @order_products.each do |i| %>
 
@@ -23,6 +25,9 @@
 <section id="checkout">
 
   <section class="form">
+    <!-- keeps form from blowing up if validations fail -->
+    <% @current_order.expiry_date = nil %>
+
     <%= form_for @current_order, url: cart_path do |f| %>
 
     <%= f.label :name, "Name: " %>

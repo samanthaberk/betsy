@@ -5,27 +5,24 @@ class Order < ApplicationRecord
   before_save :update_status
   before_save :order_total
 
-  # validates :name, presence: true,if: :ready_to_save?
-  #
-  # validates :email, presence: true, if: :ready_to_save?, format: {with: /@/, message: "Must include @"}
-  #
-  # validates :address, presence: true, if: :ready_to_save?, format: { with: /\A[\d]+/,
-  #   message: "Must start with digits" }
+  validates :name, presence: true, if: :ready_to_process?
 
-  # validates :cc_num, presence: true, if: :ready_to_save?, format: { with: /\A[\d]{16}\z/,
-  #   message: "Digits only" }
-  #
-  # # validates :expiry_date, presence: true, if: :ready_to_save?, format: { with: /\A[\d]{4}\z/,
-  # #   message: "Digits only" }
-  #
-  # validates :cc_cvv, presence: true, if: :ready_to_save?, format: { with: /\A[\d]{3}\z/,
-  #   message: "Digits only" }
-  #
-  # validates :zip, presence: true, if: :ready_to_save?, format: { with: /\A[\d]+\z/,
-  #     message: "Digits only" }
+  validates :email, presence: true, if: :ready_to_process?, format: {with: /@/, message: "Must include @"}
 
-  def ready_to_save?
-    self.status == "pending"
+  validates :address, presence: true, if: :ready_to_process?, format: { with: /\A[\d]+/,
+    message: "Must start with digits" }
+
+  validates :cc_num, presence: true, if: :ready_to_process?, format: { with: /\A[\d]{16}\z/,
+    message: "Digits only" }
+
+  validates :cc_cvv, presence: true, if: :ready_to_process?, format: { with: /\A[\d]{3}\z/,
+    message: "Digits only" }
+
+  validates :zip, presence: true, if: :ready_to_process?, format: { with: /\A[\d]+\z/,
+      message: "Digits only" }
+
+  def ready_to_process?
+    self.status == "in progress"
   end
 
   def order_total

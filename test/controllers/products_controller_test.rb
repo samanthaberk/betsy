@@ -73,8 +73,10 @@ describe ProductsController do
   end
 
   describe 'edit' do
-    it "send success if the product saves" do
-      get edit_product_path(Product.first)
+    it "send success if form loads" do
+      merchant = Merchant.first
+      login(merchant)
+      get edit_product_path(Product.find_by(merchant: merchant))
       must_respond_with :success
     end
 
