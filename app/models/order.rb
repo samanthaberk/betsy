@@ -30,7 +30,6 @@ class Order < ApplicationRecord
   end
 
   def find_revenue_paid_orders(merchant)
-
   end
 
   # reduce the total num of products available when user pays for an order
