@@ -30,8 +30,12 @@ body {
   /*font-family: 'Handlee', cursive;*/
   /*font-family: 'Arsenal', sans-serif;*/
   /*font-family: 'Neucha', cursive;*/
-
 }
+
+h2, h3, h4, h5 {
+  font-family: 'Shadows Into Light', cursive;
+}
+
 /*Navbar styling*/
 .nav {
   width: 100%;
