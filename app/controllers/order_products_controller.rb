@@ -33,9 +33,6 @@ class OrderProductsController < ApplicationController
     end
   end
 
-  def order_num_valid?(quantity, availability)
-
-  end
 
   # def create
   #   @order = current_order
