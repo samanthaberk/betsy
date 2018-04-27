@@ -10,19 +10,6 @@ class MerchantsController < ApplicationController
     redirect_to merchant_path(@merchant)
   end
 
-  def create
-    @merchant = Merchant.new(merchant_params)
-
-    if @merchant.save
-      flash[:success] = "Welcome to Sweatsy. Get ready to get sweaty!"
-      redirect_to merchant_path(@merchant)
-    else
-      flash[:error] = "Something went wrong!"
-      render :new, status: :bad_request
-    end
-
-  end
-
   def show
     @merchant = @current_user
     redirect_to root_path unless @merchant
