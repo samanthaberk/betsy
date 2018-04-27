@@ -8,6 +8,16 @@ describe MerchantsController do
       get merchants_path
       must_respond_with :success
     end
+
+    it "sends a success response when there are no merchants" do
+      # destroy all products before destroying all merchants due to foreign key constraint
+      Product.destroy_all
+      Merchant.destroy_all
+      Merchant.count.must_equal 0
+      get merchants_path
+      must_respond_with :success
+    end
+
   end
 
   describe "new" do

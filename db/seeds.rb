@@ -74,7 +74,7 @@ puts "#{order_failures.count} orders failed to save"
 
 
 
-PRODUCTS_FILE = Rails.root.join('db', 'seed_data', 'products.csv')
+PRODUCTS_FILE = Rails.root.join('db', 'seed_data', 'products2.csv')
 puts "Loading raw category data from #{PRODUCTS_FILE}"
 
 product_failures = []
@@ -85,7 +85,7 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
   product.available = row['available']
   product.description = row['description']
   product.photo = row['photo']
-  product.merchant_id = Merchant.find_by(username: row['merchant_username']).id
+  product.merchant_id = row['merchant']
   successful = product.save
   if !successful
     product_failures << product
@@ -109,7 +109,8 @@ CSV.foreach(REVIEWS_FILE, :headers => true) do |row|
   review = Review.new
   review.rating = row['rating']
   review.description = row['description']
-  review.product_id = Product.find_by(name: row['product_name']).id
+  product = Product.find_by(name: row['product_name'])
+  review.product_id = product.id
   successful = review.save
   if !successful
     review_failures << review

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :require_login
 
   def current_user
-    @current_user ||= Merchant.find(session[:merchant_id]) if session[:merchant_id]
+    @current_user ||= Merchant.first # Merchant.find(session[:merchant_id]) if session[:merchant_id]
   end
 
 # flashes message if current_user can't find a logged-in merchant
@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
       @current_order = Order.create(status: 'pending')
       session[:order_id] = @current_order.id
     end
+    return @current_order
   end
 
 end
