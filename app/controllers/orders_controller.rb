@@ -32,6 +32,8 @@ class OrdersController < ApplicationController
 
     @unshipped_orders = unshipped_orders.sum
     @shipped_orders = shipped_orders.sum
+
+    @total = @unshipped_orders + @shipped_orders
   end
 
   def show; end
