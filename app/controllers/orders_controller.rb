@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     @merchant = Merchant.find(session[:merchant_id])
-    
+
     orders = []
     OrderProduct.all.each do |order_product|
       product = Product.find(order_product.product_id)
@@ -22,11 +22,15 @@ class OrdersController < ApplicationController
     @products = products
 
     unshipped_orders = []
-    shipped_orders = []
     @orders.each do |order_product|
       if order_product.order.status == 'paid'
         unshipped_orders << order_product.product.price
-      elsif order_product.order.status == 'shipped'
+      end
+    end
+
+    shipped_orders = []
+    @orders.each do |order_product|
+      if order_product.order.status == 'shipped'
         shipped_orders << order_product.product.price
       end
     end
