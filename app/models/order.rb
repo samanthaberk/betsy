@@ -45,6 +45,13 @@ class Order < ApplicationRecord
     end
   end
 
+  def ship_order
+    if self.status == "paid"
+      self.status = "shipped"
+      self.save
+    end
+  end
+
   def get_expiry(params)
     date = Date.new(params[:order]["expiry_date(1i)"].to_i,
                        params[:order]["expiry_date(2i)"].to_i,
