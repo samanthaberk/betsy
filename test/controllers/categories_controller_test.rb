@@ -19,4 +19,10 @@ describe CategoriesController do
     end
   end
 
+  describe "create" do
+    it "creates new category with valid data" do
+
+    end
+  end
+
 end
