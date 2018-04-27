@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
 
   def index
     @merchant = Merchant.find(session[:merchant_id])
+    
     orders = []
     OrderProduct.all.each do |order_product|
       product = Product.find(order_product.product_id)

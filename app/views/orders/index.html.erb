@@ -19,7 +19,7 @@
     <tbody>
       <% @orders.each do |order| %>
       <tr>
-        <td><%= link_to Product.find(order.id).name, product_path(Product.find(order.id)) %></td>
+        <td><%= link_to Product.find(order.order.id).name, product_path(Product.find(order.id)) %></td>
         <td><%= order.quantity %></td>
         <td><%= number_to_currency(order.subtotal) %></td>
         <td><%= order.order.status %></td>
