@@ -85,7 +85,7 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
   product.available = row['available']
   product.description = row['description']
   product.photo = row['photo']
-  product.merchant_id = Merchant.find_by(username: row['merchant_username']).id
+  product.merchant_id = row['merchant_username']
   successful = product.save
   if !successful
     product_failures << product
@@ -109,7 +109,7 @@ CSV.foreach(REVIEWS_FILE, :headers => true) do |row|
   review = Review.new
   review.rating = row['rating']
   review.description = row['description']
-  review.product_id = Product.find_by(name: row['product_name']).id
+  review.product_id = row['product_name']
   successful = review.save
   if !successful
     review_failures << review
