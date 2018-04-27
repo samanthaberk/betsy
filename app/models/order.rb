@@ -33,6 +33,10 @@ class Order < ApplicationRecord
     return total
   end
 
+  def find_revenue_paid_orders(merchant)
+    
+  end
+
   # reduce the total num of products available when user pays for an order
   def decrement(order)
     order.order_products.each do |order_product|
@@ -51,6 +55,16 @@ class Order < ApplicationRecord
                        params[:order]["expiry_date(2i)"].to_i,
                        params[:order]["expiry_date(3i)"].to_i)
     self.expiry_date = "#{date.month}/#{date.year}"
+  end
+
+
+  def find_order_merchants
+    merchants = []
+    self.order_products.each do |product|
+      merchant = Merchant.find_by(product.merchant_id)
+      merchants << merchant
+    end
+    return merchants
   end
 
 end

@@ -2,6 +2,26 @@ class OrdersController < ApplicationController
   skip_before_action :require_login
   before_action :find_order, only: [:show]
 
+  def index
+    @merchant = Merchant.find(params[:merchant_id])
+    orders = []
+    OrderProduct.all.each do |order_product|
+      product = Product.find(order_product.product_id)
+      if product.merchant_id == @merchant.id
+        orders << order_product
+      end
+    end
+    @orders = orders
+
+    products = []
+    orders.each do |order|
+      product = Product.find(order.product_id)
+      products << product
+    end
+    @products = products
+
+  end
+
   def show; end
 
   def create
