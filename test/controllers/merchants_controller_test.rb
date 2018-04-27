@@ -68,7 +68,7 @@ describe MerchantsController do
 
       get merchant_path(merchant)
 
-      must_respond_with :success
+      must_respond_with :found
     end
 
     it "sends not_found if the merchant does not exist in the database" do
