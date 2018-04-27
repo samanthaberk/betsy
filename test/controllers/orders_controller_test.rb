@@ -18,20 +18,11 @@ describe OrdersController do
 
   end
 
-  describe 'new' do
-
-    it 'responds with success' do
-      get new_order_path
-      must_respond_with :success
-    end
-
-  end
-
   describe 'create' do
 
     it "can add a valid order" do
       order_data = {
-        status: nil,
+        status: "in progress",
         name: "Max",
         email: "max@adaacademy.com",
         # address zip
@@ -51,11 +42,15 @@ describe OrdersController do
       must_respond_with :redirect
       must_redirect_to order_path(Order.last.id)
 
-      Order.count.must_equal old_order_count + 1
+      # 2 bc a new cart is created when order_path is run
+      # after it's complete there's an empty cart in addition to the order added
+      Order.count.must_equal old_order_count + 2
       Order.last.name.must_equal order_data[:name]
     end
 
-    it "won't add an invalid order" do
+    # cart is created with only some of the payment validation errors
+    # this can't actually occur on the website bc validations are ran when payment details are processed
+    it "accepts invalid order bc it will hit validations at payment" do
       order_data = {
         name: "Max",
         email: "max@adaacademy.com",
@@ -69,12 +64,16 @@ describe OrdersController do
       }
       old_order_count = Order.count
 
-      Order.new(order_data).wont_be :valid?
+      Order.new(order_data).must_be :valid?
 
       post orders_path, params: { order: order_data }
 
-      must_respond_with :bad_request
-      Order.count.must_equal old_order_count
+      must_respond_with :redirect
+      must_redirect_to order_path(Order.last.id)
+
+      # 2 bc a new cart is created when order_path is run
+      # after it's complete there's an empty cart in addition to the order added
+      Order.count.must_equal old_order_count + 2
     end
 
   end

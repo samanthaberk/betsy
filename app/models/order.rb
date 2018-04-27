@@ -41,7 +41,7 @@ class Order < ApplicationRecord
   end
 
   def update_status
-    if self.status == nil?
+    if self.status == nil
       self.status = "pending"
     end
   end

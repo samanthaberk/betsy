@@ -67,30 +67,6 @@ describe Order do
       @progress_order.errors.messages.must_include :cc_num
     end
 
-    # expiry_date
-    # it "requires a expiry_date" do
-    #   @blank_order.valid?.must_equal false
-    #   @blank_order.errors.messages.must_include :expiry_date
-    # end
-    #
-    # it "requires 4 digits" do
-    #   @order.expiry_date = "113"
-    #   @order.valid?.must_equal false
-    #   @order.errors.messages.must_include :expiry_date
-    # end
-    #
-    # it "requires digits only - test with letters only" do
-    #   @order.expiry_date = "xxxx"
-    #   @order.valid?.must_equal false
-    #   @order.errors.messages.must_include :expiry_date
-    # end
-    #
-    # it "requires digits only - test with some letters" do
-    #   @order.expiry_date = "1x2x"
-    #   @order.valid?.must_equal false
-    #   @order.errors.messages.must_include :expiry_date
-    # end
-
     # cc_cvv
     it "requires a cc_cvv" do
       @progress_order.valid?.must_equal false
@@ -145,5 +121,60 @@ describe Order do
   #     # product.must_be_kind_of Product
   #   end
   # end
+
+  describe 'order_total' do
+    before do
+      @paid_order = orders(:paid_order)
+      @p_one = products(:hb)
+      @p_two = products(:water)
+      @p_three = products(:pants)
+    end
+
+    it "returns zero with no products" do
+      @paid_order.order_total.must_equal 0
+    end
+
+    it "calculates total with one of one product" do
+      OrderProduct.create(order: @paid_order, product: @p_one, quantity: 1)
+      @paid_order.order_total.must_equal 10
+    end
+
+    it "calculates total with many of one product" do
+      OrderProduct.create(order: @paid_order, product: @p_one, quantity: 4)
+      @paid_order.order_total.must_equal 40
+    end
+
+    it "calculates total with many products" do
+      OrderProduct.create(order: @paid_order, product: @p_one, quantity: 1)
+      OrderProduct.create(order: @paid_order, product: @p_two, quantity: 3)
+      OrderProduct.create(order: @paid_order, product: @p_three, quantity: 5)
+
+      @paid_order.order_total.must_equal 113
+    end
+  end
+
+  describe 'update_status' do
+
+    it "updates status when nil" do
+      new_order = Order.new()
+      new_order.save
+
+      new_order.status == nil
+
+      new_order.update_status
+
+      new_order.status.must_equal "pending"
+    end
+
+    it "doesn't update status when not nil" do
+      order = Order.create(status: 'notnil')
+      order.status.must_equal 'notnil'
+
+      order.update_status
+
+      order.status.must_equal 'notnil'
+    end
+
+  end
 
 end
