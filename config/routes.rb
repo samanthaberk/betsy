@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   patch '/products/:id/retire', to: 'products#retire', as: 'retire'
 
+  get '/:id/ship_order', to: 'orders#ship_order', as: 'ship_order' 
+
   post '/products/:id/add_review', to: 'products#create_review', as: :create_review
 
   get '/auth/github', as: 'github_login'

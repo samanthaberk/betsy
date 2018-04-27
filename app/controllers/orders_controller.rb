@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :require_login, only: [:show, :index]
-  before_action :find_order, only: [:show]
+  before_action :find_order, only: [:show, :ship_order]
 
   def index
     @merchant = Merchant.find(session[:merchant_id])
@@ -34,6 +34,10 @@ class OrdersController < ApplicationController
     @shipped_orders = shipped_orders.sum
 
     @total = @unshipped_orders + @shipped_orders
+  end
+
+  def ship_order
+    @order.ship_order
   end
 
   def show; end
