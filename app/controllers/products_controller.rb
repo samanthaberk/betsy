@@ -44,15 +44,19 @@ class ProductsController < ApplicationController
 
   def edit
 
-    # Check that the current_user matches the user associated with the product
   end
 
   def update
-    @product.assign_attributes(product_params)
+    if @product.nil?
+      render :edit, status: :not_found
+    else
+      @product.assign_attributes(product_params)
 
-    if @product.save
-      redirect_to product_path
-    else render :edit, status: :bad_request
+      if @product.save
+        redirect_to product_path
+      else
+        render :edit, status: :bad_request
+      end
     end
   end
 

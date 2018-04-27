@@ -1,6 +1,13 @@
 require "test_helper"
 
 describe ProductsController do
+  describe 'root' do
+    it 'can view the welcome page' do
+      skip
+      get root_path
+      must_respond_with :success
+    end
+  end
 
   describe 'index' do
     it "sends a success response where there are products" do
@@ -95,6 +102,8 @@ describe ProductsController do
     end
 
     it "sends not_found if product does not exist" do
+      merchant = Merchant.first
+      login(merchant)
 
       product_id = Product.last.id + 1
 
@@ -123,22 +132,25 @@ describe ProductsController do
 
   describe 'update' do
     it "updates existing product with valid data" do
+      skip
+      merchant = Merchant.first
+      login(merchant)
 
-      # product = Product.first
-      # product_data = product.attributes
-      #
-      # product_data[:name] = "sweaty stuff"
-      #
-      # product.assign_attributes(product_data)
-      #
-      # product.must_be :valid?
-      #
-      # patch product_path(product), params: { product: product_data }
-      #
-      # must_redirect_to product_path(product)
-      #
-      # product.reload
-      # product.name.must_equal product_data[:name]
+      product = Product.first
+      product_data = product.attributes
+
+      product_data[:name] = "sweaty stuff"
+
+      product.assign_attributes(product_data)
+
+      product.must_be :valid?
+
+      patch product_path(product), params: { product: product_data }
+
+      must_redirect_to product_path(product)
+
+      product.reload
+      product.name.must_equal product_data[:name]
     end
 
     it "sends bad_request when data is invalid" do
@@ -146,7 +158,7 @@ describe ProductsController do
       merchant = Merchant.first
       login(merchant)
 
-      product = Product.find_by(merchant: merchant)
+      product = Product.find_by(merchant: merchant.id)
 
       product_data = product.attributes
 
@@ -194,7 +206,7 @@ describe ProductsController do
     end
 
     it "sends not_found when product does not exist" do
-
+      skip
       product_id = Product.first.id + 1
       old_product_count = Product.count
 
