@@ -23,16 +23,34 @@
       <h4 class='home-header'>Browse Top <big>P</big>roducts</h4>
       <hr />
       <ul>
-        <% @products.each do |product|%>
         <li class='thumbnail'>
           <div class='caption'>
-            <h5><strong><%=link_to product.name, product_path(product) %></strong> </h5>
+            <h5><strong> Red Leotard </strong> </h5>
           </div>
           <div class='home-image-expand'>
-            <img src=<%=product.photo%> alt='placeholder photo' />
+            <img src='https://img.etsystatic.com/il/ba4e45/1088013044/il_570xN.1088013044_iqj2.jpg?version=1' alt='placeholder photo' height= '200' width= '250' />
           </div>
         </li>
-        <% end %>
+
+        <li class='thumbnail'>
+          <div class='caption'>
+            <h5><strong> Jazz Legs </strong> </h5>
+          </div>
+          <div class='home-image-expand'>
+            <img src='https://i.pinimg.com/originals/23/de/e8/23dee8bb0263a8507325f0cdbd8b37f9.jpg' alt='placeholder photo' height= '200' width= '250' />
+          </div>
+        </li>
+
+
+        <li class='thumbnail'>
+          <div class='caption'>
+            <h5><strong> Dry-Fit Shirt </strong> </h5>
+          </div>
+          <div class='home-image-expand'>
+            <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQEwKyPTI4qtkNvqj5V4i5fjDTTJ0WpErK6AFZp0Jf9MgBlRKwMg' alt='placeholder photo' height= '200' width= '250' />
+          </div>
+        </li>
+
       </ul>
       <%= link_to "See More", products_path, class:'button' %>
     </div>
