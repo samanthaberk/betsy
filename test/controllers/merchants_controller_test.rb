@@ -10,6 +10,8 @@ describe MerchantsController do
     end
 
     it "sends a success response when there are no merchants" do
+      # destroy all products before destroying all merchants due to foreign key constraint
+      Product.destroy_all
       Merchant.destroy_all
       Merchant.count.must_equal 0
       get merchants_path
