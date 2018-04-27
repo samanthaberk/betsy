@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
-  skip_before_action :require_login
+  before_action :require_login, only: [:show, :index]
   before_action :find_order, only: [:show]
 
   def index
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(session[:merchant_id])
     orders = []
     OrderProduct.all.each do |order_product|
       product = Product.find(order_product.product_id)
