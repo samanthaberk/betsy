@@ -1,6 +1,7 @@
+<div class='order-summary'>
+
 <% if @order_products.any? %>
 
-<div class='order-summary'>
   <h2><%= "Cart for order #{@current_order.id}" %></h2>
   <table>
     <thead>
@@ -55,7 +56,7 @@
   <%= link_to "Contine Shopping", products_path, class: "button" %>
 
   <% else %>
-  <h3>Your shopping cart is empty.</h3>
+  <h2>Your shopping cart is empty.</h2>
 
   <% end %>
 
