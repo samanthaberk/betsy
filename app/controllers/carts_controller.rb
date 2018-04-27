@@ -33,7 +33,7 @@ class CartsController < ApplicationController
   end
 
   def cart_params
-    params.require(:order).permit(:name, :email, :cc_num, :cc_cvv, :zip, expiry_date: {})
+    params.require(:order).permit(:name, :email, :cc_num, :cc_cvv, :zip, :address, expiry_date: {})
   end
 
   def previous_order
