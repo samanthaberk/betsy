@@ -20,6 +20,15 @@ class OrdersController < ApplicationController
     end
     @products = products
 
+    unshipped_orders = []
+    @orders.each do |order_product|
+      if order_product.order.status == 'paid'
+        unshipped_orders << order_product.product.price
+      end
+    end
+
+    @unshipped_orders = unshipped_orders.sum
+
   end
 
   def show; end
