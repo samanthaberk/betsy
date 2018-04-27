@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
-  skip_before_action :require_login
+  before_action :require_login, only: [:show, :index]
   before_action :find_order, only: [:show]
 
   def index
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(session[:merchant_id])
     orders = []
     OrderProduct.all.each do |order_product|
       product = Product.find(order_product.product_id)
@@ -20,6 +20,18 @@ class OrdersController < ApplicationController
     end
     @products = products
 
+    unshipped_orders = []
+    shipped_orders = []
+    @orders.each do |order_product|
+      if order_product.order.status == 'paid'
+        unshipped_orders << order_product.product.price
+      elsif order_product.order.status == 'shipped'
+        shipped_orders << order_product.product.price
+      end
+    end
+
+    @unshipped_orders = unshipped_orders.sum
+    @shipped_orders = shipped_orders.sum
   end
 
   def show; end
