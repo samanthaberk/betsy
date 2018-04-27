@@ -56,4 +56,14 @@ class Order < ApplicationRecord
     self.expiry_date = "#{date.month}/#{date.year}"
   end
 
+
+  def find_order_merchants
+    merchants = []
+    self.order_products.each do |product|
+      merchant = Merchant.find_by(product.merchant_id)
+      merchants << merchant
+    end
+    return merchants
+  end
+
 end

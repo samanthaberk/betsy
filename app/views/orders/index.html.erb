@@ -1,0 +1,31 @@
+<h3><%= @merchant.username.capitalize %>'s Order Summary Page</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Subtotal</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Buyer</th>
+      <th>Email</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each do |order| %>
+    <tr>
+      <td><%= Product.find(order.id).name %></td>
+      <td><%= order.quantity %></td>
+      <td><%= number_to_currency(order.subtotal) %></td>
+      <td><%= order.order.status %></td>
+      <td><%= order.order.created_at.strftime("%B %d, %Y") %></td>
+      <td><%= order.order.name %></td>
+      <td><%= order.order.email %></td>
+      <td><%= order.order.address %></td>
+
+    </tr>
+    <% end %>
+  </tbody>
+</table>
