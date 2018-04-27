@@ -33,8 +33,8 @@ class Order < ApplicationRecord
     return total
   end
 
-  def find_revenue_paid_orders(merchant)
-    
+  def find_revenue_paid_orders(orders)
+    return orders.sum
   end
 
   # reduce the total num of products available when user pays for an order

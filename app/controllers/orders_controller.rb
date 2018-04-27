@@ -20,6 +20,8 @@ class OrdersController < ApplicationController
     end
     @products = products
 
+    @paid_order_revenues
+
   end
 
   def show; end
