@@ -7,19 +7,19 @@ class Order < ApplicationRecord
 
   validates :name, presence: true, if: :ready_to_process?
 
-  validates :email, presence: true, if: :ready_to_process?, format: {with: /@/, message: "Must include @"}
+  validates :email, presence: true, if: :ready_to_process?, format: {with: /@/, message: "must include @"}
 
   validates :address, presence: true, if: :ready_to_process?, format: { with: /\A[\d]+/,
-    message: "Must start with digits" }
+    message: "must start with digits" }
 
   validates :cc_num, presence: true, if: :ready_to_process?, format: { with: /\A[\d]{16}\z/,
-    message: "Digits only" }
+    message: "digits only" }
 
   validates :cc_cvv, presence: true, if: :ready_to_process?, format: { with: /\A[\d]{3}\z/,
-    message: "Digits only" }
+    message: "digits only" }
 
   validates :zip, presence: true, if: :ready_to_process?, format: { with: /\A[\d]+\z/,
-      message: "Digits only" }
+      message: "digits only" }
 
   def ready_to_process?
     self.status == "in progress"
