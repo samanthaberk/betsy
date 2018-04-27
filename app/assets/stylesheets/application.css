@@ -192,15 +192,9 @@ i {
   font-size: 1.25em;
 }*/
 
-.checkout-items {
-  display:grid;
-  grid-template-columns: repeat(4, 250px);
+.prod_table {
+  padding: 2em 4em;
   font-size: 1.25em;
-}
-
-.checkout {
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
 }
 
 input[type=number]::-webkit-inner-spin-button,
