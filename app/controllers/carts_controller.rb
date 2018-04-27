@@ -12,7 +12,7 @@ class CartsController < ApplicationController
   def update
     @current_order.assign_attributes(cart_params)
     @current_order.get_expiry(params)
-    @current_order.ready_to_save?
+    @current_order.status = "in progress"
     if @current_order.save
       @current_order.status = "paid"
       if @current_order.save

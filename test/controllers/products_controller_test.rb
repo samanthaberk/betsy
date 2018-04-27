@@ -39,14 +39,12 @@ describe ProductsController do
   describe 'create' do
 
     it "can add a product with valid data" do
-      @current_user = Merchant.first
-      login(@current_user)
-
+      merchant = Merchant.first
       product_data = {
         name: 'random',
         price: 3,
         available: 4,
-        merchant_id: @current_user.id
+        merchant_id: merchant.id
       }
       old_product_count = Product.count
 
@@ -57,7 +55,8 @@ describe ProductsController do
       post products_path, params: { product: product_data}
 
       must_respond_with :redirect
-      must_redirect_to merchant_products_path(@current_user)
+      
+      must_redirect_to merchant_products_path(merchant.id)
 
       Product.count.must_equal old_product_count + 1
 
@@ -84,9 +83,11 @@ describe ProductsController do
   end
 
   describe 'edit' do
-    it "send success if the product saves" do
-    
-      get edit_product_path(Product.first)
+
+    it "send success if form loads" do
+      merchant = Merchant.first
+      login(merchant)
+      get edit_product_path(Product.find_by(merchant: merchant))
       must_respond_with :success
     end
 
@@ -139,7 +140,11 @@ describe ProductsController do
 
     it "sends bad_request when data is invalid" do
 
-      product = Product.first
+      merchant = Merchant.first
+      login(merchant)
+
+      product = Product.find_by(merchant: merchant)
+
       product_data = product.attributes
 
       product_data[:name] = ""
@@ -170,7 +175,11 @@ describe ProductsController do
   describe 'destroy' do
     it "can destroy a product" do
 
-      product_id = Product.first.id
+      merchant = Merchant.first
+      login(merchant)
+
+      product_id = Product.find_by(merchant: merchant).id
+
       old_product_count = Product.count
 
       delete product_path(product_id)

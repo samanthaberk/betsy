@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :show, :create]
   end
 
-  resources :orders, only: [:show, :new, :create, :update]
+  resources :orders, only: [:show, :create, :update]
 
   get '/checkout', to: 'carts#edit', as: :checkout
   get '/order_confirmation', to: 'carts#confirmation', as: :confirmation

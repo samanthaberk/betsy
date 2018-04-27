@@ -70,8 +70,19 @@ describe Review do
     end
   end
 
+
+  it "connects merchant and merchant_id" do
+    merchant = Merchant.first
+    product = Product.find_by(merchant_id: Merchant.first.id)
+
+    product.must_respond_to :merchant
+    product.merchant_id.must_equal merchant.id
+    product.merchant.must_be_kind_of Merchant
+  end
+
+
   describe 'relations' do
-    it "must respond to products" do
+    it "must respond to product" do
       review = Review.first
 
       review.must_respond_to :product
