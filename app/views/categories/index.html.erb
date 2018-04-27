@@ -1,15 +1,16 @@
 <h2>All products by category</h2>
 
+<div class='grid-x'>
 
   <% @products_by_category.each do | c, prods | %>
 
   <h4><%= link_to c.name.capitalize, category_path(c) %></h4>
-  <div class='grid-x'>
-    <ul>
+  <div >
+    <ul class='grid-x'>
       <% prods.each do |p| %>
       <li class="thumbnail">
         <div class='image'>
-          <img src="<%=p.photo%>" alt='product photo'/>
+          <img src="<%=p.photo%>" alt='product photo' height='200' width='250'/>
         </div>
 
         <div class='caption'>
@@ -28,6 +29,6 @@
       <% end %>
     </ul>
   </div>
-
+</div>
 </div>
 <% end %>

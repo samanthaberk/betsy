@@ -12,6 +12,7 @@ describe OrderProductsController do
         quantity: 10,
         product_id: Product.first.id
       }
+
       # equals 0
       old_count = order.order_products.count
 
@@ -19,6 +20,7 @@ describe OrderProductsController do
 
       must_respond_with :redirect
       must_redirect_to products_path
+
       # still equals 0, not saving
       order.order_products.count.must_equal old_count + 1
     end
@@ -49,8 +51,6 @@ describe OrderProductsController do
 
       item_data = order_product.attributes
       item_data[:quantity] = 2
-
-      order_product.assign_attributes(item_data)
 
       patch order_product_path(order_product), params: { order_product: item_data }
 

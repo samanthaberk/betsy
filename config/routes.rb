@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   patch '/products/:id/retire', to: 'products#retire', as: 'retire'
 
+  get '/:id/ship_order', to: 'orders#ship_order', as: 'ship_order' 
+
   post '/products/:id/add_review', to: 'products#create_review', as: :create_review
 
   get '/auth/github', as: 'github_login'
@@ -17,7 +19,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :show, :create]
   end
 
-  resources :orders, only: [:show, :new, :create, :update]
+  resources :orders, only: [:show, :create, :update]
 
   get '/checkout', to: 'carts#edit', as: :checkout
   get '/order_confirmation', to: 'carts#confirmation', as: :confirmation

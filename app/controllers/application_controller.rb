@@ -25,6 +25,7 @@ class ApplicationController < ActionController::Base
       @current_order = Order.create(status: 'pending')
       session[:order_id] = @current_order.id
     end
+    return @current_order
   end
 
 end

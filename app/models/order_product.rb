@@ -5,4 +5,9 @@ class OrderProduct < ApplicationRecord
   def subtotal
     subtotal = (self.product.price * self.quantity)
   end
+
+  def find_order_product(merchant_id)
+    product = Product.find(self.product_id)
+  end
+
 end

@@ -12,7 +12,7 @@ class CartsController < ApplicationController
   def update
     @current_order.assign_attributes(cart_params)
     @current_order.get_expiry(params)
-    @current_order.ready_to_save?
+    @current_order.status = "in progress"
     if @current_order.save
       @current_order.status = "paid"
       if @current_order.save
@@ -33,7 +33,7 @@ class CartsController < ApplicationController
   end
 
   def cart_params
-    params.require(:order).permit(:name, :email, :cc_num, :cc_cvv, :zip, expiry_date: {})
+    params.require(:order).permit(:name, :email, :cc_num, :cc_cvv, :zip, :address, expiry_date: {})
   end
 
   def previous_order
