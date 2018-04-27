@@ -36,6 +36,10 @@ class Order < ApplicationRecord
     return total
   end
 
+  def find_revenue_paid_orders(merchant)
+    
+  end
+
   # reduce the total num of products available when user pays for an order
   def decrement(order)
     order.order_products.each do |order_product|

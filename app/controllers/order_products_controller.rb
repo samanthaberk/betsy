@@ -33,23 +33,6 @@ class OrderProductsController < ApplicationController
     end
   end
 
-
-  # def create
-  #   @order = current_order
-  #   @item = OrderProduct.new(item_params)
-  #   @item.order = @order
-  #   if @order.save && @item.save
-  #     name = Product.find_by(id: @item.product_id).name.titleize
-  #     quant = @item.quantity
-  #     session[:order_id] = @order.id
-  #     flash[:success] = "You added #{quant} #{quant > 1 ? name.pluralize : name}!"
-  #     redirect_to products_path
-  #   else
-  #     # FLASH MESSAGE
-  #     @order.errors.messages
-  #   end
-  # end
-
   def update
     # FLASH MESSAGE
     @item.assign_attributes({quantity: item_params[:quantity]})
