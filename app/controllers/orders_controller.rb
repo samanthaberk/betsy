@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
-  skip_before_action :require_login
-  before_action :find_order, only: [:show]
+  before_action :require_login, only: [:show, :index]
+  before_action :find_order, only: [:show, :ship_order]
 
   def index
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(session[:merchant_id])
+
     orders = []
     OrderProduct.all.each do |order_product|
       product = Product.find(order_product.product_id)
@@ -20,6 +21,36 @@ class OrdersController < ApplicationController
     end
     @products = products
 
+    unshipped_orders = []
+    @orders.each do |order_product|
+      if order_product.order.status == 'paid'
+        unshipped_orders << order_product.product.price
+      end
+    end
+
+    shipped_orders = []
+    @orders.each do |order_product|
+      if order_product.order.status == 'shipped'
+        shipped_orders << order_product.product.price
+      end
+    end
+
+    @unshipped_orders = unshipped_orders.sum
+    @shipped_orders = shipped_orders.sum
+
+    @total = @unshipped_orders + @shipped_orders
+  end
+
+  def ship_order
+    if @order.status == "paid"
+      @order.ship_order
+      flash[:success] = "Order Shipped!"
+      redirect_to merchant_orders_path(merchant_id: @current_user.id)
+    else
+      flash[:error] = "Cannot ship an unpaid order"
+      redirect_to merchant_orders_path(merchant_id: @current_user.id)
+
+    end
   end
 
   def show; end

@@ -7,19 +7,15 @@ class Order < ApplicationRecord
 
   validates :name, presence: true, if: :ready_to_process?
 
-  validates :email, presence: true, if: :ready_to_process?, format: {with: /@/, message: "must include @"}
+  validates :email, presence: true, if: :ready_to_process?, format: { with: /@/, message: "must include @" }
 
-  validates :address, presence: true, if: :ready_to_process?, format: { with: /\A[\d]+/,
-    message: "must start with digits" }
+  validates :address, presence: true, if: :ready_to_process?, format: { with: /\A[\d]+/, message: "must start with digits" }
 
-  validates :cc_num, presence: true, if: :ready_to_process?, format: { with: /\A[\d]{16}\z/,
-    message: "digits only" }
+  validates :cc_num, presence: true, if: :ready_to_process?, format: { with: /\A[\d]{16}\z/, message: "16 digits only" }
 
-  validates :cc_cvv, presence: true, if: :ready_to_process?, format: { with: /\A[\d]{3}\z/,
-    message: "digits only" }
+  validates :cc_cvv, presence: true, if: :ready_to_process?, format: { with: /\A[\d]{3}\z/, message: "3 digits only" }
 
-  validates :zip, presence: true, if: :ready_to_process?, format: { with: /\A[\d]+\z/,
-      message: "digits only" }
+  validates :zip, presence: true, if: :ready_to_process?, format: { with: /\A[\d]+\z/, message: "digits only" }
 
   def ready_to_process?
     self.status == "in progress"
@@ -34,7 +30,6 @@ class Order < ApplicationRecord
   end
 
   def find_revenue_paid_orders(merchant)
-    
   end
 
   # reduce the total num of products available when user pays for an order
@@ -47,6 +42,13 @@ class Order < ApplicationRecord
   def update_status
     if self.status == nil
       self.status = "pending"
+    end
+  end
+
+  def ship_order
+    if self.status == "paid"
+      self.status = "shipped"
+      self.save
     end
   end
 

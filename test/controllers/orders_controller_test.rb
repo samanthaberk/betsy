@@ -6,11 +6,14 @@ describe OrdersController do
 
     it "succeeds if order exists" do
       get order_path(Order.first)
-      must_respond_with :success
+      must_respond_with :found
     end
 
     it "sends not_found if order doesn't exit" do
-      order_id = Order.last.id + 1
+      merchant = Merchant.first
+      login(merchant)
+      order_id = Order.last.id + 5
+
       get order_path(order_id)
 
       must_respond_with :not_found
@@ -76,6 +79,17 @@ describe OrdersController do
       Order.count.must_equal old_order_count + 2
     end
 
+  end
+
+  describe "index" do
+    it "finds merchants orders" do
+      merchant = Merchant.first
+      login(merchant)
+      order_id = Order.last
+
+      get merchant_orders_path(merchant)
+      must_respond_with :success
+    end
   end
 
 end

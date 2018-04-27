@@ -5,16 +5,14 @@ skip_before_action :require_login, only: [:index, :show]
     @products_by_category = Category.products_by_category
   end
 
-  def new
-    @category = Category.new(name: params[:name])
-  end
+  def new; end
 
   def create
     @category = Category.new(name: params[:category][:name])
 
     if @category.save
       flash[:success] = "Category added successfully"
-      redirect_to products_path
+      redirect_to merchant_path(id: @current_user.id)
     else
       flash.now[:failure] = "Validations Failed"
       render :new, status: :bad_request
