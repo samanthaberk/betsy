@@ -42,7 +42,15 @@ class OrdersController < ApplicationController
   end
 
   def ship_order
-    @order.ship_order
+    if @order.status == "paid"
+      @order.ship_order
+      flash[:success] = "Order Shipped!"
+      redirect_to merchant_orders_path(merchant_id: @current_user.id)
+    else
+      flash[:error] = "Cannot ship an unpaid order"
+      redirect_to merchant_orders_path(merchant_id: @current_user.id)
+
+    end
   end
 
   def show; end
