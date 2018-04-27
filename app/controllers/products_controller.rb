@@ -93,7 +93,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    return params.require(:product).permit(:name, :price, :available, :photo, :description)
+    return params.require(:product).permit(:name, :price, :available, :photo, :description, :categories)
   end
 
   def review_params
